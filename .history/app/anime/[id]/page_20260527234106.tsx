@@ -426,7 +426,7 @@ setAddingFavorites(false);
         {/* CONTENT */}
         <div className="relative z-10 max-w-7xl mx-auto px-6 pt-32 pb-20">
 
-          <div className="grid lg:grid-cols-[340px_1fr] gap-10 items-center">
+          <div className="grid lg:grid-cols-[260px_1fr] gap-10 items-center">
 
             {/* POSTER */}
             <div className="relative group flex justify-center lg:justify-start">
@@ -444,19 +444,16 @@ setAddingFavorites(false);
     "/default-anime.jpg"
   }
   alt={anime.title}
-className="
-  relative
-  w-[320px]
-  h-[480px]
-  rounded-[28px]
-  border
-  border-white/10
-  object-cover
-  shadow-[0_20px_80px_rgba(0,0,0,0.8)]
-  hover:scale-[1.02]
-  transition
-  duration-500
-"
+  className="
+    relative
+    w-[320px]
+    h-[480px]
+    rounded-[28px]
+    border
+    border-white/10
+    object-cover
+    shadow-[0_20px_80px_rgba(0,0,0,0.8)]
+  "
 />
             </div>
 

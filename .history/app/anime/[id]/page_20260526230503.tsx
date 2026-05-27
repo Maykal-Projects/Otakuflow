@@ -426,38 +426,25 @@ setAddingFavorites(false);
         {/* CONTENT */}
         <div className="relative z-10 max-w-7xl mx-auto px-6 pt-32 pb-20">
 
-          <div className="grid lg:grid-cols-[340px_1fr] gap-10 items-center">
+          <div className="grid lg:grid-cols-[260px_1fr] gap-10 items-center">
 
             {/* POSTER */}
             <div className="relative group flex justify-center lg:justify-start">
 
               <div className="absolute -inset-3 bg-gradient-to-r from-violet-600 to-fuchsia-600 rounded-[36px] blur-3xl opacity-30 group-hover:opacity-50 transition duration-500" />
 
-            <img
+             <Image
   src={
     anime.images
       ?.jpg
       ?.large_image_url ||
-    anime.images
-      ?.jpg
-      ?.image_url ||
     "/default-anime.jpg"
   }
-  alt={anime.title}
-className="
-  relative
-  w-[320px]
-  h-[480px]
-  rounded-[28px]
-  border
-  border-white/10
-  object-cover
-  shadow-[0_20px_80px_rgba(0,0,0,0.8)]
-  hover:scale-[1.02]
-  transition
-  duration-500
-"
-/>
+                alt={anime.title}
+                width={260}
+                height={390}
+                className="relative rounded-[28px] border border-white/10 object-cover shadow-[0_20px_80px_rgba(0,0,0,0.8)]"
+              />
             </div>
 
             {/* INFO */}

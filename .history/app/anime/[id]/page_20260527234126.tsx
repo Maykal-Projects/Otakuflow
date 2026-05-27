@@ -444,19 +444,16 @@ setAddingFavorites(false);
     "/default-anime.jpg"
   }
   alt={anime.title}
-className="
-  relative
-  w-[320px]
-  h-[480px]
-  rounded-[28px]
-  border
-  border-white/10
-  object-cover
-  shadow-[0_20px_80px_rgba(0,0,0,0.8)]
-  hover:scale-[1.02]
-  transition
-  duration-500
-"
+  className="
+    relative
+    w-[320px]
+    h-[480px]
+    rounded-[28px]
+    border
+    border-white/10
+    object-cover
+    shadow-[0_20px_80px_rgba(0,0,0,0.8)]
+  "
 />
             </div>
 

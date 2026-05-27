@@ -443,7 +443,6 @@ setAddingFavorites(false);
       ?.image_url ||
     "/default-anime.jpg"
   }
-  alt={anime.title}
 className="
   relative
   w-[320px]
