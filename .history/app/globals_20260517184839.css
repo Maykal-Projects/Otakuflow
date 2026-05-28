@@ -2,12 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-html,
-body {
-  background: #07010f !important;
-  overscroll-behavior: none;
-}
-
 body {
   background: black;
   color: white;
