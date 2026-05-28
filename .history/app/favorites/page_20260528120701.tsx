@@ -85,8 +85,6 @@ if (!user) {
     }
 
     setAnime(data || []);
-
-    setLoggedIn(true);
   }
 
   return (
@@ -128,12 +126,12 @@ if (!user) {
       Login to save and view favorites.
     </p>
 
-   <Link
-  href="/login"
-  className="inline-block px-8 py-4 rounded-2xl bg-gradient-to-r from-violet-600 to-fuchsia-600 font-bold"
->
-  Login
-</Link>
+    <a
+      href="/login"
+      className="inline-block px-8 py-4 rounded-2xl bg-gradient-to-r from-violet-600 to-fuchsia-600 font-bold"
+    >
+      Login
+    </a>
 
   </div>
 

@@ -85,8 +85,6 @@ if (!user) {
     }
 
     setAnime(data || []);
-
-    setLoggedIn(true);
   }
 
   return (

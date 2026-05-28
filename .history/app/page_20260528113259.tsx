@@ -92,6 +92,11 @@ export default function HomePage() {
       null
     );
 
+    const [
+  restored,
+  setRestored,
+] = useState(false);
+
  useEffect(() => {
 
   const saved =
@@ -133,7 +138,7 @@ export default function HomePage() {
       "Trending Now"
     );
 
-    setLoading(false);
+    setRestored(true);
 
   } else {
 
@@ -143,14 +148,59 @@ export default function HomePage() {
 
 }, []);
 
-  // AUTO SEARCH
+useEffect(() => {
 
+  const savedScroll =
+    sessionStorage.getItem(
+      "scrollPosition"
+    );
+
+  if (savedScroll) {
+
+    setTimeout(() => {
+
+      window.scrollTo(
+        0,
+        Number(savedScroll)
+      );
+
+    }, 100);
+
+  }
+
+}, []);
 
 useEffect(() => {
 
-  if (
-    animeList.length === 0
-  ) return;
+  const handleScroll =
+    () => {
+
+      sessionStorage.setItem(
+        "scrollPosition",
+        window.scrollY.toString()
+      );
+
+    };
+
+  window.addEventListener(
+    "scroll",
+    handleScroll
+  );
+
+  return () =>
+    window.removeEventListener(
+      "scroll",
+      handleScroll
+    );
+
+}, []);
+  
+
+  // AUTO SEARCH
+ const restoredRef =
+  useRef(false);
+
+useEffect(() => {
 
   const state = {
 
@@ -259,19 +309,22 @@ useEffect(() => {
 ) {
 
   // TRENDING
-  if (
-    !search.trim() &&
-    selectedGenres.length ===
-      0 &&
-    !selectedStatus &&
-    !selectedSort
-  ) {
+if (
+  restored &&
+  !search.trim() &&
+  selectedGenres.length === 0 &&
+  !selectedStatus &&
+  !selectedSort &&
+  animeList.length === 0
+) {
 
     if (reset) {
 
       setPage(2);
 
       loadAnime();
+
+      setRestored(true);
 
     } else {
 
@@ -572,17 +625,22 @@ if (
       );
   }
 
-function toggleGenre(
+ function toggleGenre(
   genre: string
 ) {
 
   setSelectedGenres(
     (prev) =>
-      prev.includes(genre)
+
+      prev.includes(
+        genre
+      )
+
         ? prev.filter(
             (g) =>
               g !== genre
           )
+
         : [
             ...prev,
             genre,

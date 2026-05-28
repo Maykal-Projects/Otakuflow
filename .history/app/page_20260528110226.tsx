@@ -144,13 +144,19 @@ export default function HomePage() {
 }, []);
 
   // AUTO SEARCH
+ useEffect(() => {
 
+  setPage(1);
+
+  searchAnime(true);
+
+}, [
+  selectedGenres,
+  selectedStatus,
+  selectedSort,
+]);
 
 useEffect(() => {
-
-  if (
-    animeList.length === 0
-  ) return;
 
   const state = {
 
@@ -572,30 +578,25 @@ if (
       );
   }
 
-function toggleGenre(
-  genre: string
-) {
-
-  setSelectedGenres(
-    (prev) =>
-      prev.includes(genre)
-        ? prev.filter(
-            (g) =>
-              g !== genre
-          )
-        : [
-            ...prev,
-            genre,
-          ]
-  );
-
-  setPage(1);
-
-  setTimeout(() => {
-    searchAnime(true);
-  }, 0);
-
-}
+  function toggleGenre(
+    genre: string
+  ) {
+    setSelectedGenres(
+      (prev) =>
+        prev.includes(
+          genre
+        )
+          ? prev.filter(
+              (g) =>
+                g !==
+                genre
+            )
+          : [
+              ...prev,
+              genre,
+            ]
+    );
+  }
 
   return (
     <main className="min-h-screen bg-black text-white pt-28">
@@ -686,19 +687,14 @@ function toggleGenre(
                 value={
                   selectedStatus
                 }
-                onChange={(e) => {
-
-  setSelectedStatus(
-    e.target.value
-  );
-
-  setPage(1);
-
-  setTimeout(() => {
-    searchAnime(true);
-  }, 0);
-
-}}
+                onChange={(
+                  e
+                ) =>
+                  setSelectedStatus(
+                    e.target
+                      .value
+                  )
+                }
                 className="bg-zinc-900 border border-zinc-800 rounded-2xl px-5 py-4 outline-none h-[58px]"
               >
                 <option value="">
@@ -723,19 +719,11 @@ function toggleGenre(
                 value={
                   selectedSort
                 }
-                onChange={(e) => {
-
-  setSelectedSort(
-    e.target.value
-  );
-
-  setPage(1);
-
-  setTimeout(() => {
-    searchAnime(true);
-  }, 0);
-
-}}
+                onChange={(e) =>
+                  setSelectedSort(
+                    e.target.value
+                  )
+                }
                 className="bg-zinc-900 border border-zinc-800 rounded-2xl px-5 py-4 outline-none h-[58px]"
               >
 

@@ -148,10 +148,6 @@ export default function HomePage() {
 
 useEffect(() => {
 
-  if (
-    animeList.length === 0
-  ) return;
-
   const state = {
 
     search,

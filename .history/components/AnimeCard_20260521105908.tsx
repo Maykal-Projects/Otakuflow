@@ -9,8 +9,7 @@ export default function AnimeCard({
 }) {
   return (
     <Link
-  href={`/anime/${anime.mal_id}`}
-  scroll={false}
+      href={`/anime/${anime.mal_id}`}
       className="group relative block"
     >
       {/* Glow */}

@@ -152,6 +152,12 @@ useEffect(() => {
     animeList.length === 0
   ) return;
 
+useEffect(() => {
+
+  if (
+    animeList.length === 0
+  ) return;
+
   const state = {
 
     search,

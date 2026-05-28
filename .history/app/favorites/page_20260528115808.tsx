@@ -6,7 +6,7 @@ import {
 } from "react";
 
 import Navbar from "@/components/Navbar";
-import Link from "next/link";
+
 import LibraryAnimeCard from "@/components/LibraryAnimeCard";
 
 import { supabase } from "@/lib/supabase";
@@ -60,11 +60,6 @@ if (!user) {
   setAnime([]);
 
   return;
-
-} else {
-
-  setLoggedIn(true);
-
 }
 
     const { data, error } =
@@ -85,8 +80,6 @@ if (!user) {
     }
 
     setAnime(data || []);
-
-    setLoggedIn(true);
   }
 
   return (
@@ -118,32 +111,11 @@ if (!user) {
 
         {!loggedIn ? (
 
-  <div className="bg-zinc-900/80 border border-zinc-800 rounded-[32px] p-16 text-center">
+          <div className="bg-zinc-900/80 border border-zinc-800 rounded-[32px] p-16 text-center text-zinc-400">
+            No favorites yet.
+          </div>
 
-    <h2 className="text-4xl font-black mb-4">
-      Login Required
-    </h2>
-
-    <p className="text-zinc-400 mb-8">
-      Login to save and view favorites.
-    </p>
-
-   <Link
-  href="/login"
-  className="inline-block px-8 py-4 rounded-2xl bg-gradient-to-r from-violet-600 to-fuchsia-600 font-bold"
->
-  Login
-</Link>
-
-  </div>
-
-) : anime.length === 0 ? (
-
-  <div className="bg-zinc-900/80 border border-zinc-800 rounded-[32px] p-16 text-center text-zinc-400">
-    No favorites yet.
-  </div>
-
-) : (
+        ) : (
 
           <div className="flex flex-wrap gap-10 justify-center">
 

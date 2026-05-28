@@ -10,7 +10,7 @@ import { supabase } from "@/lib/supabase";
 import Navbar from "@/components/Navbar";
 
 import LibraryAnimeCard from "@/components/LibraryAnimeCard";
-import Link from "next/link";
+
 export default function LibraryPage() {
   const [animeList, setAnimeList] =
     useState<any[]>([]);
@@ -56,13 +56,9 @@ if (!user) {
             ascending: false,
           });
 
-    if (!error && data) {
-
-  setAnimeList(data);
-
-  setLoggedIn(true);
-
-}
+      if (!error && data) {
+        setAnimeList(data);
+      }
 
       setLoading(false);
     }
@@ -108,12 +104,12 @@ if (!user) {
         Login to view your anime library.
       </p>
 
-      <Link
-  href="/login"
+      <a
+        href="/login"
         className="inline-block px-8 py-4 rounded-2xl bg-gradient-to-r from-violet-600 to-fuchsia-600 font-bold"
       >
         Login
-      </Link>
+      </a>
 
     </div>
 

@@ -143,14 +143,59 @@ export default function HomePage() {
 
 }, []);
 
-  // AUTO SEARCH
+useEffect(() => {
 
+  const savedScroll =
+    sessionStorage.getItem(
+      "scrollPosition"
+    );
+
+  if (savedScroll) {
+
+    setTimeout(() => {
+
+      window.scrollTo(
+        0,
+        Number(savedScroll)
+      );
+
+    }, 100);
+
+  }
+
+}, []);
 
 useEffect(() => {
 
-  if (
-    animeList.length === 0
-  ) return;
+  const handleScroll =
+    () => {
+
+      sessionStorage.setItem(
+        "scrollPosition",
+        window.scrollY.toString()
+      );
+
+    };
+
+  window.addEventListener(
+    "scroll",
+    handleScroll
+  );
+
+  return () =>
+    window.removeEventListener(
+      "scroll",
+      handleScroll
+    );
+
+}, []);
+  
+
+  // AUTO SEARCH
+ const restoredRef =
+  useRef(false);
+
+useEffect(() => {
 
   const state = {
 
@@ -572,30 +617,25 @@ if (
       );
   }
 
-function toggleGenre(
-  genre: string
-) {
-
-  setSelectedGenres(
-    (prev) =>
-      prev.includes(genre)
-        ? prev.filter(
-            (g) =>
-              g !== genre
-          )
-        : [
-            ...prev,
-            genre,
-          ]
-  );
-
-  setPage(1);
-
-  setTimeout(() => {
-    searchAnime(true);
-  }, 0);
-
-}
+  function toggleGenre(
+    genre: string
+  ) {
+    setSelectedGenres(
+      (prev) =>
+        prev.includes(
+          genre
+        )
+          ? prev.filter(
+              (g) =>
+                g !==
+                genre
+            )
+          : [
+              ...prev,
+              genre,
+            ]
+    );
+  }
 
   return (
     <main className="min-h-screen bg-black text-white pt-28">

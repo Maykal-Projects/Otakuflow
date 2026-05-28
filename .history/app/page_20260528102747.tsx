@@ -92,91 +92,29 @@ export default function HomePage() {
       null
     );
 
- useEffect(() => {
-
-  const saved =
-    sessionStorage.getItem(
-      "homepage-state"
-    );
-
-  if (saved) {
-
-    const state =
-      JSON.parse(saved);
-
-    setSearch(
-      state.search || ""
-    );
-
-    setSelectedGenres(
-      state.selectedGenres || []
-    );
-
-    setSelectedStatus(
-      state.selectedStatus || ""
-    );
-
-    setSelectedSort(
-      state.selectedSort || ""
-    );
-
-    setAnimeList(
-      state.animeList || []
-    );
-
-    setPage(
-      state.page || 2
-    );
-
-    setPageTitle(
-      state.pageTitle ||
-      "Trending Now"
-    );
-
-    setLoading(false);
-
-  } else {
-
+  // LOAD TRENDING
+  useEffect(() => {
     loadAnime();
-
-  }
-
-}, []);
+  }, []);
 
   // AUTO SEARCH
+ useEffect(() => {
 
-
-useEffect(() => {
+  // DON'T AUTO SEARCH
+  // WHILE USER IS TYPING
 
   if (
-    animeList.length === 0
+    search.trim()
   ) return;
 
-  const state = {
+  setPage(1);
 
-    search,
-    selectedGenres,
-    selectedStatus,
-    selectedSort,
-    animeList,
-    page,
-    pageTitle,
-
-  };
-
-  sessionStorage.setItem(
-    "homepage-state",
-    JSON.stringify(state)
-  );
+  searchAnime(true);
 
 }, [
-  search,
   selectedGenres,
   selectedStatus,
   selectedSort,
-  animeList,
-  page,
-  pageTitle,
 ]);
 
   async function loadAnime() {
@@ -302,13 +240,10 @@ useEffect(() => {
       `https://api.jikan.moe/v4/anime?page=${currentPage}&limit=24`;
 
     // SEARCH
-   if (
-  search.trim()
-) {
-
-  url += `&q=${search}`;
-
-}
+    if (
+  !search.trim() ||
+  selectedSort !== "all"
+) 
 
     // STATUS
     if (
@@ -341,15 +276,16 @@ useEffect(() => {
     // SORT
 
     // MOST POPULAR
-   if (
-  selectedSort ===
-  "popularity"
-) {
+    if (
+      selectedSort ===
+      "popularity"
+    ) {
 
-  url +=
-    "&order_by=popularity&sort=asc";
+      url =
+        `https://api.jikan.moe/v4/top/anime?page=${currentPage}&limit=24&filter=bypopularity`;
 
-}
+    }
+
     // FAVORITES
     else if (
       selectedSort ===
@@ -360,14 +296,6 @@ useEffect(() => {
         "&order_by=favorites&sort=desc";
 
     }
-
-if (
-  selectedSort ===
-  "all"
-) {
-
-  // NO SORTING
-}
 
     // TOP RATED
     else if (
@@ -416,62 +344,33 @@ if (
 
   return;
 }
-
     const json =
-  await response.json();
+      await response.json();
 
-let newAnime =
-  json.data || [];
+    const newAnime =
+      json.data || [];
 
-// STRICT TITLE FILTER
-
-if (
-  search.trim()
-) {
-
-  newAnime =
-    newAnime.filter(
-      (anime: any) =>
-
-        anime.title
-          ?.toLowerCase()
-          .includes(
-            search.toLowerCase()
-          )
-
-        ||
-
-        anime.title_english
-          ?.toLowerCase()
-          .includes(
-            search.toLowerCase()
-          )
-
+    setHasMore(
+      json.pagination
+        ?.has_next_page
     );
 
-}
+    if (reset) {
 
-setHasMore(
-  json.pagination
-    ?.has_next_page
-);
+      setAnimeList(
+        newAnime
+      );
 
-if (reset) {
+    } else {
 
-  setAnimeList(
-    newAnime
-  );
+      setAnimeList(
+        (prev) => [
+          ...prev,
+          ...newAnime,
+        ]
+      );
 
-} else {
-
-  setAnimeList(
-    (prev) => [
-      ...prev,
-      ...newAnime,
-    ]
-  );
-
-}
+    }
 
     setPage(
       currentPage + 1
@@ -572,30 +471,25 @@ if (
       );
   }
 
-function toggleGenre(
-  genre: string
-) {
-
-  setSelectedGenres(
-    (prev) =>
-      prev.includes(genre)
-        ? prev.filter(
-            (g) =>
-              g !== genre
-          )
-        : [
-            ...prev,
-            genre,
-          ]
-  );
-
-  setPage(1);
-
-  setTimeout(() => {
-    searchAnime(true);
-  }, 0);
-
-}
+  function toggleGenre(
+    genre: string
+  ) {
+    setSelectedGenres(
+      (prev) =>
+        prev.includes(
+          genre
+        )
+          ? prev.filter(
+              (g) =>
+                g !==
+                genre
+            )
+          : [
+              ...prev,
+              genre,
+            ]
+    );
+  }
 
   return (
     <main className="min-h-screen bg-black text-white pt-28">
@@ -686,19 +580,14 @@ function toggleGenre(
                 value={
                   selectedStatus
                 }
-                onChange={(e) => {
-
-  setSelectedStatus(
-    e.target.value
-  );
-
-  setPage(1);
-
-  setTimeout(() => {
-    searchAnime(true);
-  }, 0);
-
-}}
+                onChange={(
+                  e
+                ) =>
+                  setSelectedStatus(
+                    e.target
+                      .value
+                  )
+                }
                 className="bg-zinc-900 border border-zinc-800 rounded-2xl px-5 py-4 outline-none h-[58px]"
               >
                 <option value="">
@@ -723,29 +612,21 @@ function toggleGenre(
                 value={
                   selectedSort
                 }
-                onChange={(e) => {
-
-  setSelectedSort(
-    e.target.value
-  );
-
-  setPage(1);
-
-  setTimeout(() => {
-    searchAnime(true);
-  }, 0);
-
-}}
+                onChange={(e) =>
+                  setSelectedSort(
+                    e.target.value
+                  )
+                }
                 className="bg-zinc-900 border border-zinc-800 rounded-2xl px-5 py-4 outline-none h-[58px]"
               >
-
-                <option value="">
-                  Trending
-                </option>
 
 <option value="all">
   All
 </option>
+
+                <option value="">
+                  Trending
+                </option>
 
                 <option value="popularity">
                   Most Popular

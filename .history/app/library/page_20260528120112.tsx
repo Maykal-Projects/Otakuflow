@@ -10,7 +10,7 @@ import { supabase } from "@/lib/supabase";
 import Navbar from "@/components/Navbar";
 
 import LibraryAnimeCard from "@/components/LibraryAnimeCard";
-import Link from "next/link";
+
 export default function LibraryPage() {
   const [animeList, setAnimeList] =
     useState<any[]>([]);
@@ -31,16 +31,11 @@ const [loggedIn, setLoggedIn] =
 const user =
   session?.user;
 
-if (!user) {
+      if (!user) {
+        setLoading(false);
 
-  setLoggedIn(false);
-
-  setAnimeList([]);
-
-  setLoading(false);
-
-  return;
-}
+        return;
+      }
 
       const { data, error } =
         await supabase
@@ -56,13 +51,9 @@ if (!user) {
             ascending: false,
           });
 
-    if (!error && data) {
-
-  setAnimeList(data);
-
-  setLoggedIn(true);
-
-}
+      if (!error && data) {
+        setAnimeList(data);
+      }
 
       setLoading(false);
     }
@@ -95,31 +86,9 @@ if (!user) {
         )}
 
         {/* EMPTY */}
-{!loading &&
-  !loggedIn ? (
-
-    <div className="bg-zinc-900/80 border border-zinc-800 rounded-[32px] p-16 text-center">
-
-      <h2 className="text-5xl font-black mb-4">
-        Login Required
-      </h2>
-
-      <p className="text-zinc-400 text-lg mb-8">
-        Login to view your anime library.
-      </p>
-
-      <Link
-  href="/login"
-        className="inline-block px-8 py-4 rounded-2xl bg-gradient-to-r from-violet-600 to-fuchsia-600 font-bold"
-      >
-        Login
-      </Link>
-
-    </div>
-
-) : !loading &&
-  animeList.length ===
-    0 && (
+        {!loading &&
+          animeList.length ===
+            0 && (
             <div className="flex flex-col items-center justify-center py-32 text-center">
               <h2 className="text-5xl font-black mb-4">
                 Your Library Is

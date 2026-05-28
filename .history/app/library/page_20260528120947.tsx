@@ -56,13 +56,9 @@ if (!user) {
             ascending: false,
           });
 
-    if (!error && data) {
-
-  setAnimeList(data);
-
-  setLoggedIn(true);
-
-}
+      if (!error && data) {
+        setAnimeList(data);
+      }
 
       setLoading(false);
     }

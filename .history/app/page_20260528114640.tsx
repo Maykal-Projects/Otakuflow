@@ -148,10 +148,6 @@ export default function HomePage() {
 
 useEffect(() => {
 
-  if (
-    animeList.length === 0
-  ) return;
-
   const state = {
 
     search,
@@ -572,30 +568,25 @@ if (
       );
   }
 
-function toggleGenre(
-  genre: string
-) {
-
-  setSelectedGenres(
-    (prev) =>
-      prev.includes(genre)
-        ? prev.filter(
-            (g) =>
-              g !== genre
-          )
-        : [
-            ...prev,
-            genre,
-          ]
-  );
-
-  setPage(1);
-
-  setTimeout(() => {
-    searchAnime(true);
-  }, 0);
-
-}
+  function toggleGenre(
+    genre: string
+  ) {
+    setSelectedGenres(
+      (prev) =>
+        prev.includes(
+          genre
+        )
+          ? prev.filter(
+              (g) =>
+                g !==
+                genre
+            )
+          : [
+              ...prev,
+              genre,
+            ]
+    );
+  }
 
   return (
     <main className="min-h-screen bg-black text-white pt-28">
