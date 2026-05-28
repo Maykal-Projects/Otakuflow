@@ -4,9 +4,9 @@
   "description": "Track anime, build your library and discover trending shows.",
   "start_url": "/",
   "display": "standalone",
- "display_override": [
+  display_override: [
   "window-controls-overlay",
-  "standalone"
+  "standalone",
 ],
   "background_color": "#07010f",
   "theme_color": "#07010f",
