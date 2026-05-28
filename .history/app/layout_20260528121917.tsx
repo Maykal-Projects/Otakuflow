@@ -4,16 +4,19 @@ import type { Metadata } from "next";
 
 import { Toaster } from "react-hot-toast";
 
-export const metadata = {
-
+export const metadata: Metadata = {
   title: "Otakuflorist",
 
-  applicationName:
-    "Otakuflorist",
-
   description:
-    "Track anime, build your library and discover trending shows.",
+    "Modern anime tracker",
 
+  manifest:
+    "/manifest.json",
+
+  icons: {
+    apple:
+      "/icon-192.png",
+  },
 };
 
 export const viewport = {
