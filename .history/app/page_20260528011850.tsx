@@ -639,19 +639,22 @@ if (
               <input
                 type="text"
                 value={search}
-                onChange={(
-                  e
-                ) => {
-                  setSearch(
-                    e.target
-                      .value
-                  );
+                onChange={(e) => {
 
-                  fetchSuggestions(
-                    e.target
-                      .value
-                  );
-                }}
+  const value =
+    e.target.value;
+
+  setSearch(value);
+
+  fetchSuggestions(value);
+
+  setPage(1);
+
+  if (!value.trim()) {
+    loadAnime();
+  }
+
+}}
                 placeholder="Search anime..."
                 className="w-full bg-zinc-900/80 border border-zinc-800 rounded-2xl px-6 py-4 outline-none focus:border-violet-500 h-[58px]"
               />

@@ -8,7 +8,6 @@ import {
 
 import AnimeCard from "@/components/AnimeCard";
 import Navbar from "@/components/Navbar";
-import toast from "react-hot-toast";
 
 import {
   getAnimeFeed,
@@ -145,10 +144,6 @@ export default function HomePage() {
   }
 
   async function searchTrendingMore() {
-
-    if (loadingMore)
-  return;
-
     setLoadingMore(true);
 
     try {
@@ -184,209 +179,153 @@ export default function HomePage() {
   }
 
   async function searchAnime(
-  reset = false
-) {
-
-  // TRENDING
-  if (
-    !search.trim() &&
-    selectedGenres.length ===
-      0 &&
-    !selectedStatus &&
-    !selectedSort
+    reset = false
   ) {
+    // TRENDING
+    if (
+      !search.trim() &&
+      selectedGenres.length ===
+        0 &&
+      !selectedStatus &&
+      !selectedSort
+    ) {
+      if (reset) {
+        setPage(2);
 
+        loadAnime();
+      } else {
+        searchTrendingMore();
+      }
+
+      return;
+    }
+
+    // LOADING
     if (reset) {
-
-      setPage(2);
-
-      loadAnime();
-
+      setLoading(true);
     } else {
-
-      searchTrendingMore();
-
+      setLoadingMore(true);
     }
 
-    return;
-  }
+    try {
+      const currentPage =
+        reset ? 1 : page;
 
-  // LOADING
-  if (reset) {
+      let url =
+        `https://api.jikan.moe/v4/anime?page=${currentPage}&limit=24`;
 
-    setLoading(true);
+      // SEARCH
+      if (search.trim()) {
+        url += `&q=${search}`;
+      }
 
-  } else {
+      // STATUS
+      if (
+        selectedStatus
+      ) {
+        url += `&status=${selectedStatus}`;
+      }
 
-    setLoadingMore(true);
-
-  }
-
-  try {
-
-    const currentPage =
-      reset ? 1 : page;
-
-    let url =
-      `https://api.jikan.moe/v4/anime?page=${currentPage}&limit=24`;
-
-    // SEARCH
-    if (search.trim()) {
-
-      url += `&q=${search}`;
-
-    }
-
-    // STATUS
-    if (
-      selectedStatus
-    ) {
-
-      url += `&status=${selectedStatus}`;
-
-    }
-
-    // GENRES
-    if (
-      selectedGenres.length >
-      0
-    ) {
-
-      const genreIds =
-        genres
-          .filter((g) =>
-            selectedGenres.includes(
-              g.name
+      // GENRES
+      if (
+        selectedGenres.length >
+        0
+      ) {
+        const genreIds =
+          genres
+            .filter((g) =>
+              selectedGenres.includes(
+                g.name
+              )
             )
-          )
-          .map((g) => g.id)
-          .join(",");
+            .map((g) => g.id)
+            .join(",");
 
-      url += `&genres=${genreIds}`;
-    }
+        url += `&genres=${genreIds}`;
+      }
 
-    // SORT
+      // SORT
+      if (
+        selectedSort ===
+        "favorites"
+      ) {
+        url +=
+          "&order_by=favorites&sort=desc&type=tv";
+      } else if (
+        selectedSort ===
+        "score"
+      ) {
+        url +=
+          "&order_by=score&sort=desc";
+      } else if (
+        selectedSort ===
+        "popularity"
+      ) {
+        url +=
+          "&order_by=popularity&sort=asc";
+      } else if (
+        selectedSort ===
+        "start_date"
+      ) {
+        url +=
+          "&order_by=start_date&sort=desc";
+      } else if (
+        selectedSort ===
+        "members"
+      ) {
+        url +=
+          "&order_by=members&sort=desc";
+      } else {
+        url +=
+          "&order_by=members&sort=desc";
+      }
 
-    // MOST POPULAR
-    if (
-      selectedSort ===
-      "popularity"
-    ) {
+      const response =
+        await fetch(url);
 
-      url =
-        `https://api.jikan.moe/v4/top/anime?page=${currentPage}&limit=24&filter=bypopularity`;
+      const json =
+        await response.json();
 
-    }
+      const newAnime =
+        json.data || [];
 
-    // FAVORITES
-    else if (
-      selectedSort ===
-      "favorites"
-    ) {
-
-      url +=
-        "&order_by=favorites&sort=desc";
-
-    }
-
-    // TOP RATED
-    else if (
-      selectedSort ===
-      "score"
-    ) {
-
-      url +=
-        "&order_by=score&sort=desc";
-
-    }
-
-    // NEWEST
-    else if (
-      selectedSort ===
-      "start_date"
-    ) {
-
-      url +=
-        "&order_by=start_date&sort=desc";
-
-    }
-
-    // DEFAULT
-    else {
-
-      url +=
-        "&order_by=score&sort=desc";
-
-    }
-
-    const response =
-  await fetch(url);
-
-if (
-  response.status === 429
-) {
-
-  toast.error(
-    "Too many requests. Please wait a moment."
-  );
-
-  setLoading(false);
-
-  setLoadingMore(false);
-
-  return;
-}
-    const json =
-      await response.json();
-
-    const newAnime =
-      json.data || [];
-
-    setHasMore(
-      json.pagination
-        ?.has_next_page
-    );
-
-    if (reset) {
-
-      setAnimeList(
-        newAnime
+      setHasMore(
+        json.pagination
+          ?.has_next_page
       );
 
-    } else {
+      if (reset) {
+        setAnimeList(
+          newAnime
+        );
+      } else {
+        setAnimeList(
+          (prev) => [
+            ...prev,
+            ...newAnime,
+          ]
+        );
+      }
 
-      setAnimeList(
-        (prev) => [
-          ...prev,
-          ...newAnime,
-        ]
+      setPage(
+        currentPage + 1
       );
 
+      setPageTitle(
+        search.trim()
+          ? `Search Results for "${search}"`
+          : "Filtered Anime"
+      );
+    } catch (error) {
+      console.error(
+        "SEARCH ERROR:",
+        error
+      );
     }
 
-    setPage(
-      currentPage + 1
-    );
-
-    setPageTitle(
-      search.trim()
-        ? `Search Results for "${search}"`
-        : "Filtered Anime"
-    );
-
-  } catch (error) {
-
-    console.error(
-      "SEARCH ERROR:",
-      error
-    );
-
+    setLoading(false);
+    setLoadingMore(false);
   }
-
-  setLoading(false);
-
-  setLoadingMore(false);
-}
 
   async function fetchSuggestions(
     value: string
@@ -417,15 +356,6 @@ if (
               await fetch(
                 `https://api.jikan.moe/v4/anime?q=${value}&order_by=members&sort=desc&type=tv&limit=8`
               );
-
-if (
-  response.status === 429
-) {
-
-  setSuggestions([]);
-
-  return;
-}
 
             const json =
               await response.json();
@@ -459,7 +389,7 @@ if (
             );
           }
         },
-        800
+        250
       );
   }
 
@@ -508,10 +438,10 @@ if (
           </p>
 
           {/* SEARCH + FILTERS */}
-          <div className="grid grid-cols-[auto_1fr_auto] items-center gap-6 max-w-7xl mx-auto">
+          <div className="flex flex-wrap items-center justify-center gap-4 max-w-7xl mx-auto">
 
             {/* LEFT FILTERS */}
-            <div className="flex items-center gap-4">
+            <div className="flex flex-wrap items-center gap-4">
 
               {/* GENRE */}
               <div className="relative">
@@ -631,11 +561,14 @@ if (
                   Newest
                 </option>
 
+                <option value="members">
+                  Most Members
+                </option>
               </select>
             </div>
 
             {/* SEARCH INPUT */}
-            <div className="relative w-full">
+            <div className="relative w-full max-w-3xl">
               <input
                 type="text"
                 value={search}
@@ -669,21 +602,20 @@ if (
                           anime.mal_id
                         }
                         onClick={() => {
+                          setSearch(
+                            anime.title
+                          );
 
-  const title =
-    anime.title;
+                          setSuggestions(
+                            []
+                          );
 
-  setSearch(title);
+                          setPage(1);
 
-  setSuggestions([]);
-
-  setPage(1);
-
-  setTimeout(() => {
-    searchAnime(true);
-  }, 0);
-
-}}
+                          searchAnime(
+                            true
+                          );
+                        }}
                         className="w-full flex items-center gap-4 p-4 hover:bg-white/5 transition text-left border-b border-white/5 last:border-none group"
                       >
                         <div className="relative">
@@ -721,16 +653,14 @@ if (
             <button
               type="button"
               onClick={() => {
+                setSuggestions(
+                  []
+                );
 
-  if (loading || loadingMore)
-    return;
+                setPage(1);
 
-  setSuggestions([]);
-
-  setPage(1);
-
-  searchAnime(true);
-}}
+                searchAnime(true);
+              }}
               className="bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:opacity-90 px-8 py-4 rounded-2xl font-bold transition h-[58px]"
             >
               Search

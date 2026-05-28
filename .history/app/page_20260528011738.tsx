@@ -669,6 +669,7 @@ if (
                           anime.mal_id
                         }
                         onClick={() => {
+                          onClick={() => {
 
   const title =
     anime.title;
