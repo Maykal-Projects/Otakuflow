@@ -381,15 +381,15 @@ if (
     }
 
     // NEWEST
-    else if (
-      selectedSort ===
-      "start_date"
-    ) {
+   else if (
+  selectedSort ===
+  "newest"
+) {
 
-      url +=
-        "&order_by=start_date&sort=desc";
+  url +=
+    "&order_by=start_date&sort=desc";
 
-    }
+}
 
     // DEFAULT
     else {
@@ -550,46 +550,29 @@ if (
             const json =
               await response.json();
 
-       const filtered = Array.from(
+            const filtered =
+              (
+                json.data ||
+                []
+              ).filter(
+                (
+                  anime: any
+                ) =>
+                  anime.title
+                    ?.toLowerCase()
+                    .includes(
+                      value.toLowerCase()
+                    ) ||
+                  anime.title_english
+                    ?.toLowerCase()
+                    .includes(
+                      value.toLowerCase()
+                    )
+              );
 
-  new Map(
-
-    (json.data || [])
-
-      .filter(
-        (anime: any) =>
-
-          anime.title
-            ?.toLowerCase()
-            .includes(
-              value.toLowerCase()
-            )
-
-          ||
-
-          anime.title_english
-            ?.toLowerCase()
-            .includes(
-              value.toLowerCase()
-            )
-
-      )
-
-      .map(
-        (anime: any) => [
-          anime.mal_id,
-          anime,
-        ]
-      )
-
-  ).values()
-
-);
-
-setSuggestions(
-  filtered
-);
-
+            setSuggestions(
+              filtered
+            );
           } catch (error) {
             console.error(
               error
@@ -753,14 +736,36 @@ function toggleGenre(
                 }
                 onChange={(e) => {
 
+  const value =
+    e.target.value;
+
   setSelectedSort(
-    e.target.value
+    value
   );
 
   setPage(1);
 
+  // CLEAR SEARCH
+  setSearch("");
+
+  // CLEAR SUGGESTIONS
+  setSuggestions([]);
+
   setTimeout(() => {
-    searchAnime(true);
+
+    // TRENDING
+    if (
+      value === ""
+    ) {
+
+      loadAnime();
+
+    } else {
+
+      searchAnime(true);
+
+    }
+
   }, 0);
 
 }}
@@ -787,9 +792,9 @@ function toggleGenre(
                   Top Rated
                 </option>
 
-                <option value="start_date">
-                  Newest
-                </option>
+                <option value="newest">
+  Newest
+</option>
 
               </select>
             </div>

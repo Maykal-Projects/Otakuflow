@@ -550,7 +550,7 @@ if (
             const json =
               await response.json();
 
-       const filtered = Array.from(
+            const filtered = Array.from(
 
   new Map(
 
@@ -585,11 +585,24 @@ if (
   ).values()
 
 );
+                (
+                  anime: any
+                ) =>
+                  anime.title
+                    ?.toLowerCase()
+                    .includes(
+                      value.toLowerCase()
+                    ) ||
+                  anime.title_english
+                    ?.toLowerCase()
+                    .includes(
+                      value.toLowerCase()
+                    )
+              );
 
-setSuggestions(
-  filtered
-);
-
+            setSuggestions(
+              filtered
+            );
           } catch (error) {
             console.error(
               error

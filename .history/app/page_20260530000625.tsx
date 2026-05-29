@@ -550,7 +550,7 @@ if (
             const json =
               await response.json();
 
-       const filtered = Array.from(
+            const filtered = Array.from(
 
   new Map(
 
@@ -585,20 +585,6 @@ if (
   ).values()
 
 );
-
-setSuggestions(
-  filtered
-);
-
-          } catch (error) {
-            console.error(
-              error
-            );
-          }
-        },
-        800
-      );
-  }
 
 function toggleGenre(
   genre: string

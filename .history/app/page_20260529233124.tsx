@@ -550,46 +550,29 @@ if (
             const json =
               await response.json();
 
-       const filtered = Array.from(
+            const filtered =
+              (
+                json.data ||
+                []
+              ).filter(
+                (
+                  anime: any
+                ) =>
+                  anime.title
+                    ?.toLowerCase()
+                    .includes(
+                      value.toLowerCase()
+                    ) ||
+                  anime.title_english
+                    ?.toLowerCase()
+                    .includes(
+                      value.toLowerCase()
+                    )
+              );
 
-  new Map(
-
-    (json.data || [])
-
-      .filter(
-        (anime: any) =>
-
-          anime.title
-            ?.toLowerCase()
-            .includes(
-              value.toLowerCase()
-            )
-
-          ||
-
-          anime.title_english
-            ?.toLowerCase()
-            .includes(
-              value.toLowerCase()
-            )
-
-      )
-
-      .map(
-        (anime: any) => [
-          anime.mal_id,
-          anime,
-        ]
-      )
-
-  ).values()
-
-);
-
-setSuggestions(
-  filtered
-);
-
+            setSuggestions(
+              filtered
+            );
           } catch (error) {
             console.error(
               error
@@ -753,14 +736,38 @@ function toggleGenre(
                 }
                 onChange={(e) => {
 
+onChange={(e) => {
+
+  const value =
+    e.target.value;
+
   setSelectedSort(
-    e.target.value
+    value
   );
 
   setPage(1);
 
+  // CLEAR SEARCH
+  setSearch("");
+
+  // CLEAR SUGGESTIONS
+  setSuggestions([]);
+
   setTimeout(() => {
-    searchAnime(true);
+
+    // TRENDING
+    if (
+      value === ""
+    ) {
+
+      loadAnime();
+
+    } else {
+
+      searchAnime(true);
+
+    }
+
   }, 0);
 
 }}

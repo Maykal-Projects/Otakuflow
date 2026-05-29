@@ -144,13 +144,7 @@ export default function HomePage() {
 }, []);
 
   // AUTO SEARCH
-
-
 useEffect(() => {
-
-  if (
-    animeList.length === 0
-  ) return;
 
   const state = {
 
@@ -423,17 +417,6 @@ if (
 let newAnime =
   json.data || [];
 
-newAnime = Array.from(
-  new Map(
-    newAnime.map(
-      (anime: any) => [
-        anime.mal_id,
-        anime,
-      ]
-    )
-  ).values()
-);
-
 // STRICT TITLE FILTER
 
 if (
@@ -550,46 +533,29 @@ if (
             const json =
               await response.json();
 
-       const filtered = Array.from(
+            const filtered =
+              (
+                json.data ||
+                []
+              ).filter(
+                (
+                  anime: any
+                ) =>
+                  anime.title
+                    ?.toLowerCase()
+                    .includes(
+                      value.toLowerCase()
+                    ) ||
+                  anime.title_english
+                    ?.toLowerCase()
+                    .includes(
+                      value.toLowerCase()
+                    )
+              );
 
-  new Map(
-
-    (json.data || [])
-
-      .filter(
-        (anime: any) =>
-
-          anime.title
-            ?.toLowerCase()
-            .includes(
-              value.toLowerCase()
-            )
-
-          ||
-
-          anime.title_english
-            ?.toLowerCase()
-            .includes(
-              value.toLowerCase()
-            )
-
-      )
-
-      .map(
-        (anime: any) => [
-          anime.mal_id,
-          anime,
-        ]
-      )
-
-  ).values()
-
-);
-
-setSuggestions(
-  filtered
-);
-
+            setSuggestions(
+              filtered
+            );
           } catch (error) {
             console.error(
               error
@@ -600,7 +566,7 @@ setSuggestions(
       );
   }
 
-function toggleGenre(
+ function toggleGenre(
   genre: string
 ) {
 

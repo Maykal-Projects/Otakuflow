@@ -254,6 +254,95 @@ useEffect(() => {
     setLoadingMore(false);
   }
 
+
+function buildAnimeUrl(
+  currentPage: number
+) {
+
+  let url =
+    `https://api.jikan.moe/v4/anime?page=${currentPage}&limit=24`;
+
+  // SEARCH
+  if (
+    search.trim()
+  ) {
+
+    url += `&q=${search}`;
+
+  }
+
+  // STATUS
+  if (
+    selectedStatus
+  ) {
+
+    url += `&status=${selectedStatus}`;
+
+  }
+
+  // GENRES
+  if (
+    selectedGenres.length > 0
+  ) {
+
+    const genreIds =
+      genres
+        .filter((g) =>
+          selectedGenres.includes(
+            g.name
+          )
+        )
+        .map((g) => g.id)
+        .join(",");
+
+    url += `&genres=${genreIds}`;
+
+  }
+
+  // SORT
+  switch (
+    selectedSort
+  ) {
+
+    case "newest":
+
+      url +=
+        "&order_by=start_date&sort=desc";
+
+      break;
+
+    case "score":
+
+      url +=
+        "&order_by=score&sort=desc";
+
+      break;
+
+    case "favorites":
+
+      url +=
+        "&order_by=favorites&sort=desc";
+
+      break;
+
+    case "popularity":
+
+      url +=
+        "&order_by=popularity&sort=desc";
+
+      break;
+
+    default:
+
+      url +=
+        "&order_by=members&sort=desc";
+
+  }
+
+  return url;
+
+}
+
   async function searchAnime(
   reset = false
 ) {
@@ -298,106 +387,10 @@ useEffect(() => {
     const currentPage =
       reset ? 1 : page;
 
-    let url =
-      `https://api.jikan.moe/v4/anime?page=${currentPage}&limit=24`;
-
-    // SEARCH
-   if (
-  search.trim()
-) {
-
-  url += `&q=${search}`;
-
-}
-
-    // STATUS
-    if (
-      selectedStatus
-    ) {
-
-      url += `&status=${selectedStatus}`;
-
-    }
-
-    // GENRES
-    if (
-      selectedGenres.length >
-      0
-    ) {
-
-      const genreIds =
-        genres
-          .filter((g) =>
-            selectedGenres.includes(
-              g.name
-            )
-          )
-          .map((g) => g.id)
-          .join(",");
-
-      url += `&genres=${genreIds}`;
-    }
-
-    // SORT
-
-    // MOST POPULAR
-   if (
-  selectedSort ===
-  "popularity"
-) {
-
-  url +=
-    "&order_by=popularity&sort=asc";
-
-}
-    // FAVORITES
-    else if (
-      selectedSort ===
-      "favorites"
-    ) {
-
-      url +=
-        "&order_by=favorites&sort=desc";
-
-    }
-
-if (
-  selectedSort ===
-  "all"
-) {
-
-  // NO SORTING
-}
-
-    // TOP RATED
-    else if (
-      selectedSort ===
-      "score"
-    ) {
-
-      url +=
-        "&order_by=score&sort=desc";
-
-    }
-
-    // NEWEST
-    else if (
-      selectedSort ===
-      "start_date"
-    ) {
-
-      url +=
-        "&order_by=start_date&sort=desc";
-
-    }
-
-    // DEFAULT
-    else {
-
-      url +=
-        "&order_by=score&sort=desc";
-
-    }
+  const url =
+  buildAnimeUrl(
+    currentPage
+  );
 
     const response =
   await fetch(url);
@@ -550,46 +543,29 @@ if (
             const json =
               await response.json();
 
-       const filtered = Array.from(
+            const filtered =
+              (
+                json.data ||
+                []
+              ).filter(
+                (
+                  anime: any
+                ) =>
+                  anime.title
+                    ?.toLowerCase()
+                    .includes(
+                      value.toLowerCase()
+                    ) ||
+                  anime.title_english
+                    ?.toLowerCase()
+                    .includes(
+                      value.toLowerCase()
+                    )
+              );
 
-  new Map(
-
-    (json.data || [])
-
-      .filter(
-        (anime: any) =>
-
-          anime.title
-            ?.toLowerCase()
-            .includes(
-              value.toLowerCase()
-            )
-
-          ||
-
-          anime.title_english
-            ?.toLowerCase()
-            .includes(
-              value.toLowerCase()
-            )
-
-      )
-
-      .map(
-        (anime: any) => [
-          anime.mal_id,
-          anime,
-        ]
-      )
-
-  ).values()
-
-);
-
-setSuggestions(
-  filtered
-);
-
+            setSuggestions(
+              filtered
+            );
           } catch (error) {
             console.error(
               error
@@ -753,14 +729,36 @@ function toggleGenre(
                 }
                 onChange={(e) => {
 
+  const value =
+    e.target.value;
+
   setSelectedSort(
-    e.target.value
+    value
   );
 
   setPage(1);
 
+  // CLEAR SEARCH
+  setSearch("");
+
+  // CLEAR SUGGESTIONS
+  setSuggestions([]);
+
   setTimeout(() => {
-    searchAnime(true);
+
+    // TRENDING
+    if (
+      value === ""
+    ) {
+
+      loadAnime();
+
+    } else {
+
+      searchAnime(true);
+
+    }
+
   }, 0);
 
 }}
@@ -787,7 +785,7 @@ function toggleGenre(
                   Top Rated
                 </option>
 
-                <option value="start_date">
+                <option value="newest">
                   Newest
                 </option>
 
