@@ -423,17 +423,6 @@ if (
 let newAnime =
   json.data || [];
 
-newAnime = Array.from(
-  new Map(
-    newAnime.map(
-      (anime: any) => [
-        anime.mal_id,
-        anime,
-      ]
-    )
-  ).values()
-);
-
 // STRICT TITLE FILTER
 
 if (
@@ -909,11 +898,11 @@ function toggleGenre(
         ) : (
           <>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-              {animeList.map(
-                (
-                  anime: any,
-                  index: number
-                ) => (
+              animeList.map(
+  (
+    anime,
+    index
+  ) => (
                   <AnimeCard
                     key={`${anime.mal_id}-${index}`}
                     anime={anime}

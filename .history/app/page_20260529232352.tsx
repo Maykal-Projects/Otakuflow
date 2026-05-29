@@ -423,17 +423,6 @@ if (
 let newAnime =
   json.data || [];
 
-newAnime = Array.from(
-  new Map(
-    newAnime.map(
-      (anime: any) => [
-        anime.mal_id,
-        anime,
-      ]
-    )
-  ).values()
-);
-
 // STRICT TITLE FILTER
 
 if (

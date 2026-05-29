@@ -144,13 +144,7 @@ export default function HomePage() {
 }, []);
 
   // AUTO SEARCH
-
-
 useEffect(() => {
-
-  if (
-    animeList.length === 0
-  ) return;
 
   const state = {
 
@@ -423,17 +417,6 @@ if (
 let newAnime =
   json.data || [];
 
-newAnime = Array.from(
-  new Map(
-    newAnime.map(
-      (anime: any) => [
-        anime.mal_id,
-        anime,
-      ]
-    )
-  ).values()
-);
-
 // STRICT TITLE FILTER
 
 if (
@@ -583,30 +566,25 @@ if (
       );
   }
 
-function toggleGenre(
-  genre: string
-) {
-
-  setSelectedGenres(
-    (prev) =>
-      prev.includes(genre)
-        ? prev.filter(
-            (g) =>
-              g !== genre
-          )
-        : [
-            ...prev,
-            genre,
-          ]
-  );
-
-  setPage(1);
-
-  setTimeout(() => {
-    searchAnime(true);
-  }, 0);
-
-}
+  function toggleGenre(
+    genre: string
+  ) {
+    setSelectedGenres(
+      (prev) =>
+        prev.includes(
+          genre
+        )
+          ? prev.filter(
+              (g) =>
+                g !==
+                genre
+            )
+          : [
+              ...prev,
+              genre,
+            ]
+    );
+  }
 
   return (
     <main className="min-h-screen bg-black text-white pt-28">

@@ -1,0 +1,22 @@
+[33mdee625b[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m Fixed mobile scrolling and blur performance
+[33md187fce[m Adjusted anime card mobile sizing
+[33ma737d98[m[33m ([m[1;31morigin/main[m[33m)[m Fixed Android transparent screen
+[33m97f6f9d[m Fixed Android splash screen
+[33mb147d20[m Fixed manifest and startup background
+[33m909aed2[m Improved PWA splash screen and app startup
+[33md5d249c[m Added proper PWA icons
+[33m87915d6[m Added custom app icon
+[33m937bdd1[m Changed app name to Otakuflorist
+[33m71be579[m Fixed favorites, library and browser back
+[33mff1b2f4[m fix search system
+[33m1330ede[m change app theme color
+[33m9206f6c[m update
+[33m905d876[m remove next image completely
+[33m69fab8a[m remove next image import
+[33m996f0ff[m fix vercel images
+[33meaeea8f[m improve anime poster
+[33m44af6a0[m update next version
+[33m66a8008[m refresh deployment
+[33mebb54df[m update nextjs
+[33m0a9f6a9[m fix metadata
+[33m5162b6f[m Initial commit
