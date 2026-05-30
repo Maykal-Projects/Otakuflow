@@ -129,10 +129,10 @@ export default function Navbar() {
                       "/default-avatar.png"
                     }
                     alt=""
-                    className="w-8 h-8 rounded-full object-cover border border-violet-500/30"
+                    className="w-11 h-11 rounded-full object-cover border-2 border-violet-500/40 shadow-[0_0_20px_rgba(168,85,247,0.35)]"
                   />
 
-                  <span className="text-sm font-semibold">
+                  <span>
                     Profile
                   </span>
 
@@ -162,10 +162,9 @@ export default function Navbar() {
 
             </div>
 
-</div>
+          </div>
 
-
-{/* MOBILE */}
+          {/* MOBILE */}
 <div className="sm:hidden relative z-50">
 
   {/* TOP BAR */}
@@ -187,50 +186,24 @@ export default function Navbar() {
 
     </div>
 
-    {/* RIGHT */}
-    <div className="flex items-center gap-2">
+    {/* HAMBURGER */}
+    <button
+      type="button"
+      onClick={() =>
+        setMobileMenu(
+          !mobileMenu
+        )
+      }
+      className="p-2 rounded-full border border-white/10 bg-white/[0.03]"
+    >
 
-      {user && (
-
-        <Link
-          href="/profile"
-          className="w-9 h-9 rounded-full overflow-hidden border border-violet-500/30 shrink-0"
-        >
-
-          <img
-            src={
-              user.user_metadata
-                ?.avatar_url ||
-              "/default-avatar.png"
-            }
-            alt=""
-            className="w-full h-full object-cover"
-          />
-
-        </Link>
-
+      {mobileMenu ? (
+        <X size={22} />
+      ) : (
+        <Menu size={22} />
       )}
 
-      {/* HAMBURGER */}
-      <button
-        type="button"
-        onClick={() =>
-          setMobileMenu(
-            !mobileMenu
-          )
-        }
-        className="p-2 rounded-full border border-white/10 bg-white/[0.03]"
-      >
-
-        {mobileMenu ? (
-          <X size={22} />
-        ) : (
-          <Menu size={22} />
-        )}
-
-      </button>
-
-    </div>
+    </button>
 
   </div>
 

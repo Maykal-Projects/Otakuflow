@@ -323,14 +323,12 @@ await supabase
   {anime.title}
 </h2>
           <button onClick={toggleFavorite}>
-           <Heart
-  size={18}
-  className={`sm:w-7 sm:h-7 transition ${
-    favorite
-      ? "text-pink-500 fill-pink-500"
-      : "text-zinc-500"
-  }`}
-/>
+            <Heart
+              size={28}
+              className={`transition ${
+                favorite ? "text-pink-500 fill-pink-500" : "text-zinc-500"
+              }`}
+            />
           </button>
         </div>
 

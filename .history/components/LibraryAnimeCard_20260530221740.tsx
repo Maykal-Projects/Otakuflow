@@ -301,11 +301,11 @@ await supabase
     ""
   }`}
 >
-<div
+      <div
   className={`relative w-full overflow-hidden flex-shrink-0 ${
     hideRemoveButton
-      ? "aspect-[2/3]"
-      : "aspect-[2/3]"
+      ? "h-[220px] sm:h-[430px]"
+      : "h-[190px] sm:h-[480px]"
   }`}
 >
         <img
@@ -319,18 +319,16 @@ await supabase
   className="p-3 sm:p-5 flex flex-col flex-1"
 >
         <div className="flex items-center justify-between">
-        <h2 className="text-xs sm:text-xl font-black leading-tight line-clamp-2 h-[40px] h-[56px] sm:h-[72px] overflow-hidden">
+        <h2 className="text-xs sm:text-xl font-black leading-tight line-clamp-2 min-h-[40px] h-[56px] sm:h-[72px] overflow-hidden">
   {anime.title}
 </h2>
           <button onClick={toggleFavorite}>
-           <Heart
-  size={18}
-  className={`sm:w-7 sm:h-7 transition ${
-    favorite
-      ? "text-pink-500 fill-pink-500"
-      : "text-zinc-500"
-  }`}
-/>
+            <Heart
+              size={28}
+              className={`transition ${
+                favorite ? "text-pink-500 fill-pink-500" : "text-zinc-500"
+              }`}
+            />
           </button>
         </div>
 

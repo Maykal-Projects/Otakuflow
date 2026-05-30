@@ -298,14 +298,16 @@ await supabase
   return (
     <div
   className={`group relative w-[180px] min-w-[180px] max-w-[180px] sm:w-[320px] sm:min-w-[320px] sm:max-w-[320px] rounded-2xl overflow-hidden border border-white/10 bg-zinc-900/80 backdrop-blur-xl ${
-    ""
+    hideRemoveButton
+      ? "h-[450px] sm:h-[640px]"
+      : "h-[520px] sm:h-[760px]"
   }`}
 >
-<div
+      <div
   className={`relative w-full overflow-hidden flex-shrink-0 ${
     hideRemoveButton
-      ? "aspect-[2/3]"
-      : "aspect-[2/3]"
+      ? "h-[220px] sm:h-[430px]"
+      : "h-[210px] sm:h-[480px]"
   }`}
 >
         <img
@@ -316,21 +318,23 @@ await supabase
       </div>
 
       <div
-  className="p-3 sm:p-5 flex flex-col flex-1"
+  className={
+    hideRemoveButton
+      ? ""
+      : "mt-auto w-full h-[56px]"
+  }
 >
         <div className="flex items-center justify-between">
-        <h2 className="text-xs sm:text-xl font-black leading-tight line-clamp-2 h-[40px] h-[56px] sm:h-[72px] overflow-hidden">
+        <h2 className="text-sm sm:text-xl font-black leading-tight line-clamp-2 min-h-[72px] max-h-[72px] overflow-hidden">
   {anime.title}
 </h2>
           <button onClick={toggleFavorite}>
-           <Heart
-  size={18}
-  className={`sm:w-7 sm:h-7 transition ${
-    favorite
-      ? "text-pink-500 fill-pink-500"
-      : "text-zinc-500"
-  }`}
-/>
+            <Heart
+              size={28}
+              className={`transition ${
+                favorite ? "text-pink-500 fill-pink-500" : "text-zinc-500"
+              }`}
+            />
           </button>
         </div>
 
@@ -358,15 +362,15 @@ await supabase
         {/* Rating */}
         <div
   className={`flex items-center justify-center gap-1 ${
-hideRemoveButton
-  ? "mb-0"
-  : "mb-3"
+    hideRemoveButton
+      ? "mb-0"
+      : "mb-8"
   }`}
 >
           {[...Array(10)].map((_, i) => (
             <Star
               key={i}
-              size={16}
+              size={22}
               className={`cursor-pointer ${
                 i < rating ? "text-yellow-400 fill-yellow-400" : "text-zinc-600"
               }`}
@@ -378,11 +382,10 @@ hideRemoveButton
         {!hideRemoveButton && (
   <button
     onClick={removeAnime}
-    className="mt-auto w-full h-[44px] flex items-center justify-center gap-2 rounded-2xl bg-red-500/10 border border-red-500/20 hover:bg-red-500/20 transition font-semibold flex-shrink-0 text-sm"
+    className="w-full h-[56px] flex items-center justify-center gap-2 rounded-2xl bg-red-500/10 border border-red-500/20 hover:bg-red-500/20 transition font-semibold flex-shrink-0"
   >
-    
     <Trash2 size={18} />
-    Delete
+    Remove from Library
   </button>
 )}
       </div>

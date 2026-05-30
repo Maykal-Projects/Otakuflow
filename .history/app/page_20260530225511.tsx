@@ -1066,27 +1066,6 @@ function toggleGenre(
           </>
         )}
       </section>
-
-{/* MOBILE DESKTOP TOGGLE */}
-<div className="sm:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-[999999]">
-
-  <button
-    onClick={() =>
-      setDesktopMode(
-        !desktopMode
-      )
-    }
-    className="px-5 py-3 rounded-full border border-violet-500/20 bg-black/80 backdrop-blur-2xl text-sm font-bold shadow-[0_0_30px_rgba(168,85,247,0.25)]"
-  >
-
-    {desktopMode
-      ? "Mobile View"
-      : "Desktop View"}
-
-  </button>
-
-</div>
-
     </main>
   );
 }

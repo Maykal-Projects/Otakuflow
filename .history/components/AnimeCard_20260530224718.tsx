@@ -63,7 +63,6 @@ export default function AnimeCard({
 
 </div>
 
-</div>
         {/* Content */}
         <div className="p-3 sm:p-5 flex flex-col flex-1">
           {/* Genres */}

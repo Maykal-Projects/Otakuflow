@@ -129,10 +129,10 @@ export default function Navbar() {
                       "/default-avatar.png"
                     }
                     alt=""
-                    className="w-8 h-8 rounded-full object-cover border border-violet-500/30"
+                    className="w-10 h-10  object-cover border border-violet-500/20"
                   />
 
-                  <span className="text-sm font-semibold">
+                  <span>
                     Profile
                   </span>
 
@@ -162,10 +162,9 @@ export default function Navbar() {
 
             </div>
 
-</div>
+          </div>
 
-
-{/* MOBILE */}
+          {/* MOBILE */}
 <div className="sm:hidden relative z-50">
 
   {/* TOP BAR */}
@@ -187,57 +186,31 @@ export default function Navbar() {
 
     </div>
 
-    {/* RIGHT */}
-    <div className="flex items-center gap-2">
+    {/* HAMBURGER */}
+    <button
+      type="button"
+      onClick={() =>
+        setMobileMenu(
+          !mobileMenu
+        )
+      }
+      className="p-2 rounded-full border border-white/10 bg-white/[0.03]"
+    >
 
-      {user && (
-
-        <Link
-          href="/profile"
-          className="w-9 h-9 rounded-full overflow-hidden border border-violet-500/30 shrink-0"
-        >
-
-          <img
-            src={
-              user.user_metadata
-                ?.avatar_url ||
-              "/default-avatar.png"
-            }
-            alt=""
-            className="w-full h-full object-cover"
-          />
-
-        </Link>
-
+      {mobileMenu ? (
+        <X size={22} />
+      ) : (
+        <Menu size={22} />
       )}
 
-      {/* HAMBURGER */}
-      <button
-        type="button"
-        onClick={() =>
-          setMobileMenu(
-            !mobileMenu
-          )
-        }
-        className="p-2 rounded-full border border-white/10 bg-white/[0.03]"
-      >
-
-        {mobileMenu ? (
-          <X size={22} />
-        ) : (
-          <Menu size={22} />
-        )}
-
-      </button>
-
-    </div>
+    </button>
 
   </div>
 
   {/* DROPDOWN */}
   {mobileMenu && (
 
-    <div className="absolute z-[999999] top-[115%] left-0 right-0 flex flex-col gap-2 rounded-2xl border border-white/10 bg-black/95 backdrop-blur-3xl p-3 shadow-[0_20px_80px_rgba(0,0,0,0.55)] pointer-events-auto">
+    <div className="absolute z-[999999] top-[115%] left-0 right-0 flex flex-col gap-2 rounded-2xl border border-white/10 bg-black/95 backdrop-blur-3xl p-3 shadow-[0_20px_80px_rgba(0,0,0,0.55)] pointer-events-auto"
 
       <Link
         href="/library"

@@ -32,38 +32,27 @@ export default function AnimeCard({
           {/* Overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent opacity-90" />
 
-    {/* TOP INFO */}
-<div className="absolute top-2 left-2 right-2 flex items-center justify-between">
+          {/* Floating Score */}
+          {anime.score && (
+            <div className="absolute top-2 right-2 sm:top-4 sm:right-4 backdrop-blur-xl bg-black/50 border border-white/10 px-2 py-1 sm:px-4 sm:py-2 rounded-xl sm:rounded-2xl">
+              <p className="text-sm font-bold text-white">
+                ⭐ {anime.score}
+              </p>
+            </div>
+          )}
 
-  {/* Episodes */}
-  <div className="backdrop-blur-xl bg-black/55 border border-white/10 px-2 py-1 rounded-xl">
-
-    <p className="text-[10px] sm:text-sm font-bold text-white">
-      {anime.episodes
-        ? `${anime.episodes} EP`
-        : anime.airing
-          ? "Airing"
-          : "?? EP"}
-    </p>
-
-  </div>
-
-  {/* Score */}
-  {anime.score && (
-
-    <div className="backdrop-blur-xl bg-black/55 border border-white/10 px-2 py-1 rounded-xl">
-
-      <p className="text-[10px] sm:text-sm font-bold text-yellow-300">
-        ⭐ {anime.score}
-      </p>
-
-    </div>
-
-  )}
-
+          {/* Episodes */}
+          <div className="absolute top-2 left-2 sm:top-4 sm:left-4 backdrop-blur-xl bg-black/50 border border-white/10 px-2 py-1 sm:px-4 sm:py-2 rounded-xl sm:rounded-2xl"
+  <p className="text-sm font-bold text-white">
+    {anime.episodes
+      ? `${anime.episodes} EP`
+      : anime.airing
+        ? "Airing"
+        : "?? EP"}
+  </p>
 </div>
+        </div>
 
-</div>
         {/* Content */}
         <div className="p-3 sm:p-5 flex flex-col flex-1">
           {/* Genres */}

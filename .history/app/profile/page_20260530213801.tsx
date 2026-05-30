@@ -187,7 +187,7 @@ const watching =
                   user?.email}
               </h1>
 
-              <p className="text-zinc-400 text-xl text-center md:text-left">
+              <p className="text-zinc-400 text-xl">
                 Anime Enthusiast
               </p>
             </div>

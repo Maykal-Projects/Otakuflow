@@ -43,9 +43,6 @@ export default function HomePage() {
   const [loading, setLoading] =
     useState(true);
 
-const [desktopMode, setDesktopMode] =
-  useState(false);
-
   const [
     loadingMore,
     setLoadingMore,
@@ -719,17 +716,11 @@ function toggleGenre(
 
 }
   return (
-    <main
-  className={`relative z-0 min-h-screen bg-black text-white pt-28 transition-all duration-300 ${
-    desktopMode
-      ? "scale-[0.80] origin-top w-[125%]"
-      : ""
-  }`}
->
+    <main className="relative z-0 min-h-screen bg-black text-white pt-28 scale-[0.90] sm:scale-100 origin-top">
       <Navbar />
 
       {/* HERO */}
-      <section className="relative z-0 pt-32 sm:pt-40 pb-20 sm:pb-24 px-4 sm:px-6">
+      <section className="relative pt-32 sm:pt-40 pb-20 sm:pb-24 px-4 sm:px-6">
         <div className="relative z-0 max-w-7xl mx-auto text-center overflow-visible">
           {/* TITLE */}
           <h1 className="text-2xl sm:text-5xl md:text-8xl font-black leading-none mb-8 bg-gradient-to-r from-violet-400 via-fuchsia-500 to-pink-500 bg-clip-text text-transparent">
@@ -886,7 +877,7 @@ function toggleGenre(
               {/* SUGGESTIONS */}
               {suggestions.length >
                 0 && (
-                <div className="absolute z-[999999] top-full mt-3 w-full max-h-[420px] overflow-y-auto bg-zinc-950/95 backdrop-blur-2xl border border-zinc-800 rounded-3xl z-50 shadow-[0_20px_80px_rgba(0,0,0,0.6)]">
+                <div className="absolute top-full mt-3 w-full max-h-[420px] overflow-y-auto bg-zinc-950/95 backdrop-blur-2xl border border-zinc-800 rounded-3xl z-50 shadow-[0_20px_80px_rgba(0,0,0,0.6)]">
                   {suggestions.map(
                     (
                       anime: any
@@ -967,7 +958,7 @@ function toggleGenre(
       </section>
 
       {/* GRID */}
-      <section className="relative z-0 max-w-7xl mx-auto px-4 sm:px-6 pb-24 mt-10">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 pb-24">
         <div className="mb-12">
           <h2 className="text-2xl sm:text-4xl md:text-5xl font-black mb-3">
             {pageTitle}
@@ -1019,7 +1010,7 @@ function toggleGenre(
           </div>
         ) : (
           <>
-            <div className="grid grid-cols-3 sm:grid-cols-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-6 lg:gap-8">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6 lg:gap-8">
               {animeList.map(
                 (
                   anime: any,
@@ -1066,27 +1057,6 @@ function toggleGenre(
           </>
         )}
       </section>
-
-{/* MOBILE DESKTOP TOGGLE */}
-<div className="sm:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-[999999]">
-
-  <button
-    onClick={() =>
-      setDesktopMode(
-        !desktopMode
-      )
-    }
-    className="px-5 py-3 rounded-full border border-violet-500/20 bg-black/80 backdrop-blur-2xl text-sm font-bold shadow-[0_0_30px_rgba(168,85,247,0.25)]"
-  >
-
-    {desktopMode
-      ? "Mobile View"
-      : "Desktop View"}
-
-  </button>
-
-</div>
-
     </main>
   );
 }

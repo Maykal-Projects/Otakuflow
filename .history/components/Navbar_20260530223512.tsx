@@ -194,7 +194,7 @@ export default function Navbar() {
 
         <Link
           href="/profile"
-          className="w-9 h-9 rounded-full overflow-hidden border border-violet-500/30 shrink-0"
+          className="w-10 h-10 rounded-full overflow-hidden border border-violet-500/30 shrink-0"
         >
 
           <img
@@ -276,6 +276,8 @@ export default function Navbar() {
     </div>
 
   )}
+
+</div>
 
 </div>
 

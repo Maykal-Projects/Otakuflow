@@ -129,10 +129,10 @@ export default function Navbar() {
                       "/default-avatar.png"
                     }
                     alt=""
-                    className="w-8 h-8 rounded-full object-cover border border-violet-500/30"
+                    className="w-10 h-10  object-cover border border-violet-500/20"
                   />
 
-                  <span className="text-sm font-semibold">
+                  <span>
                     Profile
                   </span>
 
@@ -162,127 +162,30 @@ export default function Navbar() {
 
             </div>
 
-</div>
+          </div>
 
+          {/* MOBILE */}
+          <div className="sm:hidden relative z-[999999] pointer-events-auto">
 
-{/* MOBILE */}
-<div className="sm:hidden relative z-50">
+            {/* TOP BAR */}
+            <div className="flex items-center justify-between">
 
-  {/* TOP BAR */}
-  <div className="flex items-center justify-between">
+  {/* LEFT */}
+  <div className="flex items-center w-full">
 
-    {/* LEFT */}
-    <div className="flex items-center gap-3">
+  <Link
+    href="/"
+    className="px-4 py-2 rounded-full bg-violet-500/10 border border-violet-500/20 text-sm font-bold"
+  >
+    Home
+  </Link>
 
-      <Link
-        href="/"
-        className="px-4 py-2 rounded-full bg-violet-500/10 border border-violet-500/20 text-sm font-bold"
-      >
-        Home
-      </Link>
+  <div className="flex-1 flex justify-center">
 
-      <h1 className="text-lg font-black bg-gradient-to-r from-violet-400 to-fuchsia-500 bg-clip-text text-transparent">
-        Anime
-      </h1>
-
-    </div>
-
-    {/* RIGHT */}
-    <div className="flex items-center gap-2">
-
-      {user && (
-
-        <Link
-          href="/profile"
-          className="w-9 h-9 rounded-full overflow-hidden border border-violet-500/30 shrink-0"
-        >
-
-          <img
-            src={
-              user.user_metadata
-                ?.avatar_url ||
-              "/default-avatar.png"
-            }
-            alt=""
-            className="w-full h-full object-cover"
-          />
-
-        </Link>
-
-      )}
-
-      {/* HAMBURGER */}
-      <button
-        type="button"
-        onClick={() =>
-          setMobileMenu(
-            !mobileMenu
-          )
-        }
-        className="p-2 rounded-full border border-white/10 bg-white/[0.03]"
-      >
-
-        {mobileMenu ? (
-          <X size={22} />
-        ) : (
-          <Menu size={22} />
-        )}
-
-      </button>
-
-    </div>
+    <h1 className="text-lg font-black bg-gradient-to-r from-violet-400 to-fuchsia-500 bg-clip-text text-transparent">
+      Anime
+    </h1>
 
   </div>
 
-  {/* DROPDOWN */}
-  {mobileMenu && (
-
-    <div className="absolute z-[999999] top-[115%] left-0 right-0 flex flex-col gap-2 rounded-2xl border border-white/10 bg-black/95 backdrop-blur-3xl p-3 shadow-[0_20px_80px_rgba(0,0,0,0.55)] pointer-events-auto">
-
-      <Link
-        href="/library"
-        className={navClass("/library")}
-      >
-        Library
-      </Link>
-
-      <Link
-        href="/favorites"
-        className={navClass("/favorites")}
-      >
-        Favorites
-      </Link>
-
-      {user ? (
-
-        <button
-          onClick={logout}
-          className="bg-red-500/10 hover:bg-red-500/20 border border-red-500/20 px-4 py-3 rounded-xl font-semibold transition text-left"
-        >
-          Logout
-        </button>
-
-      ) : (
-
-        <Link
-          href="/login"
-          className="bg-violet-500/10 hover:bg-violet-500/20 border border-violet-500/20 px-4 py-3 rounded-xl font-semibold transition"
-        >
-          Login
-        </Link>
-
-      )}
-
-    </div>
-
-  )}
-
 </div>
-
-        </div>
-
-      </nav>
-
-    </div>
-  );
-}

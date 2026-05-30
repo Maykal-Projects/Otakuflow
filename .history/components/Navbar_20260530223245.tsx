@@ -110,129 +110,50 @@ export default function Navbar() {
 
             </div>
 
-            {/* RIGHT */}
-            <div className="flex items-center gap-3">
-
-              {user && (
-
-                <Link
-                  href="/profile"
-                  className={`${navClass(
-                    "/profile"
-                  )} flex items-center gap-2`}
-                >
-
-                  <img
-                    src={
-                      user.user_metadata
-                        ?.avatar_url ||
-                      "/default-avatar.png"
-                    }
-                    alt=""
-                    className="w-8 h-8 rounded-full object-cover border border-violet-500/30"
-                  />
-
-                  <span className="text-sm font-semibold">
-                    Profile
-                  </span>
-
-                </Link>
-
-              )}
-
-              {user ? (
-
-                <button
-                  onClick={logout}
-                  className="bg-red-500/10 hover:bg-red-500/20 border border-red-500/20 px-6 py-3 rounded-2xl font-semibold transition"
-                >
-                  Logout
-                </button>
-
-              ) : (
-
-                <Link
-                  href="/login"
-                  className="bg-violet-500/10 hover:bg-violet-500/20 border border-violet-500/20 px-6 py-3 rounded-2xl font-semibold transition"
-                >
-                  Login
-                </Link>
-
-              )}
-
-            </div>
-
-</div>
-
-
-{/* MOBILE */}
-<div className="sm:hidden relative z-50">
-
-  {/* TOP BAR */}
-  <div className="flex items-center justify-between">
-
-    {/* LEFT */}
-    <div className="flex items-center gap-3">
-
-      <Link
-        href="/"
-        className="px-4 py-2 rounded-full bg-violet-500/10 border border-violet-500/20 text-sm font-bold"
-      >
-        Home
-      </Link>
-
-      <h1 className="text-lg font-black bg-gradient-to-r from-violet-400 to-fuchsia-500 bg-clip-text text-transparent">
-        Anime
-      </h1>
-
-    </div>
-
-    {/* RIGHT */}
+{/* RIGHT */}
     <div className="flex items-center gap-2">
 
-      {user && (
+  {user && (
 
-        <Link
-          href="/profile"
-          className="w-9 h-9 rounded-full overflow-hidden border border-violet-500/30 shrink-0"
-        >
+    <Link
+      href="/profile"
+      className="w-10 h-10 rounded-full overflow-hidden border border-violet-500/30 shrink-0"
+    >
 
-          <img
-            src={
-              user.user_metadata
-                ?.avatar_url ||
-              "/default-avatar.png"
-            }
-            alt=""
-            className="w-full h-full object-cover"
-          />
-
-        </Link>
-
-      )}
-
-      {/* HAMBURGER */}
-      <button
-        type="button"
-        onClick={() =>
-          setMobileMenu(
-            !mobileMenu
-          )
+      <img
+        src={
+          user.user_metadata
+            ?.avatar_url ||
+          "/default-avatar.png"
         }
-        className="p-2 rounded-full border border-white/10 bg-white/[0.03]"
-      >
+        alt=""
+        className="w-full h-full object-cover"
+      />
 
-        {mobileMenu ? (
-          <X size={22} />
-        ) : (
-          <Menu size={22} />
-        )}
+    </Link>
 
-      </button>
+  )}
 
-    </div>
+  {/* HAMBURGER */}
+  <button
+    type="button"
+    onClick={() =>
+      setMobileMenu(
+        !mobileMenu
+      )
+    }
+    className="p-2 rounded-full border border-white/10 bg-white/[0.03]"
+  >
 
-  </div>
+    {mobileMenu ? (
+      <X size={22} />
+    ) : (
+      <Menu size={22} />
+    )}
+
+  </button>
+
+</div>
 
   {/* DROPDOWN */}
   {mobileMenu && (
