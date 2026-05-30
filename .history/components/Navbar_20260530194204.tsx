@@ -72,12 +72,12 @@ export default function Navbar() {
 
   return (
 
-    <div className="absolute top-4 left-1/2 -translate-x-1/2 z-50 w-[96%] max-w-[1500 px]">
+    <div className="absolute top-0 left-0 w-full z-50 flex justify-center pt-4 px-4">
 
-      <nav className="w-full overflow-visible rounded-[999px] border border-violet-500/20 bg-gradient-to-r from-violet-950/40 via-black/30 to-fuchsia-950/30 backdrop-blur-3xl shadow-[0_10px_80px_rgba(139,92,246,0.25)] relative">
+      <nav className="mx-auto w-full max-w-[1700px] overflow-visible rounded-[24px] border border-violet-500/20 bg-gradient-to-r from-violet-950/40 via-black/30 to-fuchsia-950/30 backdrop-blur-3xl shadow-[0_10px_80px_rgba(139,92,246,0.25)] relative">
 
         {/* GLOW */}
-        <div className="absolute inset-0 rounded-full overflow-hidden pointer-events-none bg-[radial-gradient(circle_at_top_left,rgba(168,85,247,0.18),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(217,70,239,0.18),transparent_35%)]" />
+        <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_top_left,rgba(168,85,247,0.18),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(217,70,239,0.18),transparent_35%)]" />
 
         <div className="relative z-50 px-3 sm:px-6 py-3 sm:py-4 overflow-visible">
 
@@ -129,7 +129,7 @@ export default function Navbar() {
                       "/default-avatar.png"
                     }
                     alt=""
-                    className="w-10 h-10  object-cover border border-violet-500/20"
+                    className="w-10 h-10 rounded-full object-cover border border-violet-500/20"
                   />
 
                   <span>
@@ -201,7 +201,7 @@ export default function Navbar() {
             {/* DROPDOWN */}
             {mobileMenu && (
 
-              <div className="absolute top-[115%] left-0 right-0 flex flex-col gap-2 rounded-2xl border border-white/10 bg-black/95 backdrop-blur-3xl p-3 shadow-[0_20px_80px_rgba(0,0,0,0.55)]">
+              <div className="mt-4 flex flex-col gap-3 rounded-2xl border border-white/10 bg-black/95 backdrop-blur-3xl p-3 shadow-[0_20px_80px_rgba(0,0,0,0.55)]">
 
                 <Link
                   href="/"

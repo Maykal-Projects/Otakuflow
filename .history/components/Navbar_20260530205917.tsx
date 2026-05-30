@@ -201,7 +201,7 @@ export default function Navbar() {
             {/* DROPDOWN */}
             {mobileMenu && (
 
-              <div className="absolute top-[115%] left-0 right-0 flex flex-col gap-2 rounded-2xl border border-white/10 bg-black/95 backdrop-blur-3xl p-3 shadow-[0_20px_80px_rgba(0,0,0,0.55)]">
+              <div className="mt-4 flex flex-col gap-3 rounded-2xl border border-white/10 bg-black/95 backdrop-blur-3xl p-3 shadow-[0_20px_80px_rgba(0,0,0,0.55)]">
 
                 <Link
                   href="/"
