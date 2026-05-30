@@ -72,7 +72,7 @@ export default function Navbar() {
 
   return (
 
-    <div className="absolute top-0 left-0 w-full z-50 flex justify-center pt-4 px-4">
+    <header className="fixed top-0 left-0 w-full z-[999999] px-4 pt-4">
 
       <nav className="mx-auto w-full max-w-[1700px] overflow-visible rounded-[32px] border border-violet-500/20 bg-gradient-to-r from-violet-950/40 via-black/30 to-fuchsia-950/30 backdrop-blur-3xl shadow-[0_10px_80px_rgba(139,92,246,0.25)] relative">
 
@@ -165,7 +165,7 @@ export default function Navbar() {
           </div>
 
           {/* MOBILE */}
-          <div className="sm:hidden relative z-[999999] pointer-events-auto">
+          <div className="sm:hidden">
 
             {/* TOP BAR */}
             <div className="flex items-center justify-between">
@@ -174,19 +174,15 @@ export default function Navbar() {
                 Anime
               </h1>
 
-
-     <button
-  type="button"
-  onClick={() => {
-
-    console.log("CLICK");
-
-    setMobileMenu(
-      !mobileMenu
-    );
-  }}
-  className="p-2 rounded-xl border border-white/10 bg-white/[0.03] active:scale-95 transition"
->
+              <button
+                type="button"
+                onClick={() =>
+                  setMobileMenu(
+                    !mobileMenu
+                  )
+                }
+                className="p-2 rounded-xl border border-white/10 bg-white/[0.03] active:scale-95 transition"
+              >
 
                 {mobileMenu ? (
                   <X size={22} />
@@ -281,6 +277,6 @@ export default function Navbar() {
 
       </nav>
 
-    </div>
+    </header>
   );
 }

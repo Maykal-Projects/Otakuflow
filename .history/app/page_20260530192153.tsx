@@ -720,8 +720,8 @@ function toggleGenre(
       <Navbar />
 
       {/* HERO */}
-      <section className="relative pt-32 sm:pt-40 pb-20 sm:pb-24 px-4 sm:px-6">
-        <div className="relative z-0 max-w-7xl mx-auto text-center overflow-visible">
+      <div className="relative max-w-7xl mx-auto text-center">
+        <div className="relative max-w-7xl mx-auto text-center">
           {/* TITLE */}
           <h1 className="text-2xl sm:text-5xl md:text-8xl font-black leading-none mb-8 bg-gradient-to-r from-violet-400 via-fuchsia-500 to-pink-500 bg-clip-text text-transparent">
             Discover Anime
@@ -744,7 +744,7 @@ function toggleGenre(
             <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 w-full">
 
               {/* GENRE */}
-              <div className="relative z-[9999] overflow-visible">
+              <div className="relative">
                 <button
                   type="button"
                   onClick={() =>
@@ -761,7 +761,7 @@ function toggleGenre(
                 </button>
 
                 {showGenreFilter && (
-                  <div className="absolute z-[99999] top-full mt-3 left-0 right-0 sm:right-auto bg-zinc-900/95 backdrop-blur-2xl border border-zinc-800 rounded-3xl p-4 sm:p-6 w-full sm:w-[500px] max-w-[95vw]">
+                  <div className="absolute top-full mt-3 left-0 right-0 sm:right-auto bg-zinc-900/95 backdrop-blur-2xl border border-zinc-800 rounded-3xl p-4 sm:p-6 w-full sm:w-[500px] max-w-[95vw]">
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                       {genres.map(
                         (

@@ -174,19 +174,16 @@ export default function Navbar() {
                 Anime
               </h1>
 
-
-     <button
+              <button
   type="button"
-  onClick={() => {
-
-    console.log("CLICK");
-
-    setMobileMenu(
-      !mobileMenu
-    );
-  }}
-  className="p-2 rounded-xl border border-white/10 bg-white/[0.03] active:scale-95 transition"
->
+  aria-label="Toggle menu"
+                onClick={() =>
+                  setMobileMenu(
+                    !mobileMenu
+                  )
+                }
+                className="relative z-[999999] p-2 rounded-xl border border-white/10 bg-white/[0.03] active:scale-95 transition"
+              >
 
                 {mobileMenu ? (
                   <X size={22} />
@@ -281,6 +278,6 @@ export default function Navbar() {
 
       </nav>
 
-    </div>
+    </header>
   );
 }

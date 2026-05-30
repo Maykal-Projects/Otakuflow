@@ -761,7 +761,7 @@ function toggleGenre(
                 </button>
 
                 {showGenreFilter && (
-                  <div className="absolute z-[99999] top-full mt-3 left-0 right-0 sm:right-auto bg-zinc-900/95 backdrop-blur-2xl border border-zinc-800 rounded-3xl p-4 sm:p-6 w-full sm:w-[500px] max-w-[95vw]">
+                  <div className="absolute top-full mt-3 left-0 right-0 sm:right-auto bg-zinc-900/95 backdrop-blur-2xl border border-zinc-800 rounded-3xl p-4 sm:p-6 w-full sm:w-[500px] max-w-[95vw]">
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                       {genres.map(
                         (

@@ -1,11 +1,7 @@
 "use client";
 
 import Link from "next/link";
-
-import {
-  Menu,
-  X,
-} from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 import {
   usePathname,
@@ -16,8 +12,7 @@ import {
   useState,
 } from "react";
 
-import { supabase }
-from "@/lib/supabase";
+import { supabase } from "@/lib/supabase";
 
 export default function Navbar() {
 
@@ -27,10 +22,8 @@ export default function Navbar() {
   const [user, setUser] =
     useState<any>(null);
 
-  const [
-    mobileMenu,
-    setMobileMenu,
-  ] = useState(false);
+  const [mobileMenu, setMobileMenu] =
+    useState(false);
 
   useEffect(() => {
 
@@ -72,17 +65,17 @@ export default function Navbar() {
 
   return (
 
-    <div className="absolute top-0 left-0 w-full z-50 flex justify-center pt-4 px-4">
+    <header className="fixed top-0 left-0 w-full z-[999999] px-4 pt-4">
 
-      <nav className="mx-auto w-full max-w-[1700px] overflow-visible rounded-[32px] border border-violet-500/20 bg-gradient-to-r from-violet-950/40 via-black/30 to-fuchsia-950/30 backdrop-blur-3xl shadow-[0_10px_80px_rgba(139,92,246,0.25)] relative">
+      <nav className="mx-auto w-full max-w-[1700px] rounded-3xl border border-violet-500/20 bg-red-500">
 
         {/* GLOW */}
         <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_top_left,rgba(168,85,247,0.18),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(217,70,239,0.18),transparent_35%)]" />
 
-        <div className="relative z-50 px-3 sm:px-6 py-3 sm:py-4 overflow-visible">
+        <div className="relative z-10 px-3 sm:px-6 py-3 sm:py-4">
 
           {/* DESKTOP */}
-          <div className="hidden sm:flex items-center justify-between pointer-events-auto">
+          <div className="hidden sm:flex items-center justify-between gap-3">
 
             {/* LEFT */}
             <div className="flex items-center gap-3">
@@ -161,11 +154,10 @@ export default function Navbar() {
               )}
 
             </div>
-
           </div>
 
           {/* MOBILE */}
-          <div className="sm:hidden relative z-[999999] pointer-events-auto">
+          <div className="sm:hidden">
 
             {/* TOP BAR */}
             <div className="flex items-center justify-between">
@@ -174,19 +166,15 @@ export default function Navbar() {
                 Anime
               </h1>
 
-
-     <button
-  type="button"
-  onClick={() => {
-
-    console.log("CLICK");
-
-    setMobileMenu(
-      !mobileMenu
-    );
-  }}
-  className="p-2 rounded-xl border border-white/10 bg-white/[0.03] active:scale-95 transition"
->
+              <button
+                type="button"
+                onClick={() =>
+                  setMobileMenu(
+                    !mobileMenu
+                  )
+                }
+                className="p-2 rounded-xl border border-white/10 bg-white/[0.03] active:scale-95 transition"
+              >
 
                 {mobileMenu ? (
                   <X size={22} />
@@ -201,11 +189,14 @@ export default function Navbar() {
             {/* DROPDOWN */}
             {mobileMenu && (
 
-              <div className="mt-4 flex flex-col gap-3 rounded-3xl border border-white/10 bg-black/95 backdrop-blur-3xl p-3 shadow-[0_20px_80px_rgba(0,0,0,0.55)]">
+              <div className="mt-4 flex flex-col gap-3 rounded-3xl border border-white/10 bg-black/90 backdrop-blur-3xl p-3 shadow-[0_20px_80px_rgba(0,0,0,0.45)] animate-in fade-in slide-in-from-top-2 duration-300">
 
                 <Link
                   href="/"
                   className={navClass("/")}
+                  onClick={() =>
+                    setMobileMenu(false)
+                  }
                 >
                   Home
                 </Link>
@@ -213,6 +204,9 @@ export default function Navbar() {
                 <Link
                   href="/library"
                   className={navClass("/library")}
+                  onClick={() =>
+                    setMobileMenu(false)
+                  }
                 >
                   Library
                 </Link>
@@ -220,6 +214,9 @@ export default function Navbar() {
                 <Link
                   href="/favorites"
                   className={navClass("/favorites")}
+                  onClick={() =>
+                    setMobileMenu(false)
+                  }
                 >
                   Favorites
                 </Link>
@@ -231,6 +228,9 @@ export default function Navbar() {
                     className={`${navClass(
                       "/profile"
                     )} flex items-center gap-2`}
+                    onClick={() =>
+                      setMobileMenu(false)
+                    }
                   >
 
                     <img
@@ -265,6 +265,9 @@ export default function Navbar() {
                   <Link
                     href="/login"
                     className="bg-violet-500/10 hover:bg-violet-500/20 border border-violet-500/20 px-4 py-3 rounded-2xl font-semibold transition"
+                    onClick={() =>
+                      setMobileMenu(false)
+                    }
                   >
                     Login
                   </Link>
@@ -281,6 +284,6 @@ export default function Navbar() {
 
       </nav>
 
-    </div>
+    </header>
   );
 }
