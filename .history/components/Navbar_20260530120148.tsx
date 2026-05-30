@@ -55,13 +55,13 @@ export default function Navbar() {
 
   return (
   <div className="absolute top-0 left-0 w-full z-50 flex justify-center pt-4 px-4">
-    <nav className="w-full rounded-[32px] border border-violet-500/20 bg-gradient-to-r from-violet-950/40 via-black/30 to-fuchsia-950/30 backdrop-blur-3xl shadow-[0_10px_80px_rgba(139,92,246,0.25)] relative">
+    <nav className="w-full w-full overflow-hidden rounded-[32px] border border-violet-500/20 bg-gradient-to-r from-violet-950/40 via-black/30 to-fuchsia-950/30 backdrop-blur-3xl shadow-[0_10px_80px_rgba(139,92,246,0.25)] overflow-hidden relative">
 
       {/* GLOW */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(168,85,247,0.18),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(217,70,239,0.18),transparent_35%)]" />
 
       {/* CONTENT */}
-      <div className="relative px-3 sm:px-6 py-3 sm:py-4 flex flex-wrap items-center justify-between gap-3">
+      <div className="relative px-3 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
 
         {/* LEFT */}
         <div className="flex items-center gap-3">

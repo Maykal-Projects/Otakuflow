@@ -716,11 +716,13 @@ function toggleGenre(
 
 }
   return (
-    <main className="min-h-screen bg-black text-white pt-28">
+    <main className="min-h-screen bg-black text-white pt-28 overflow-x-hidden">
       <Navbar />
 
       {/* HERO */}
       <section className="relative pt-28 sm:pt-40 pb-20 sm:pb-24 px-4 sm:px-6">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[1000px] bg-violet-700/20 blur-[180px] rounded-full pointer-events-none" />
+
         <div className="relative max-w-7xl mx-auto text-center">
           {/* TITLE */}
           <h1 className="text-3xl sm:text-5xl md:text-8xl font-black leading-none mb-8 bg-gradient-to-r from-violet-400 via-fuchsia-500 to-pink-500 bg-clip-text text-transparent">

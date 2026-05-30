@@ -7,14 +7,15 @@ body {
   background: #07010f !important;
   color: white;
   font-family: Arial, Helvetica, sans-serif;
-  min-height: 100%;
-  width: 100%;
+  min-height: 100vh;
+  overscroll-behavior: none;
   overflow-x: hidden;
   overflow-y: auto;
+  width: 100%;
 }
 
 body {
-  position: relative;
+  overflow-y: auto;
 }
 
 @keyframes spinSlow {
