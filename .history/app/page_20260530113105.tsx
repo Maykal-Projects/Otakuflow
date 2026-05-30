@@ -976,7 +976,7 @@ function toggleGenre(
 
     : selectedSort ===
       "popularity"
-    ? "Most watched anime"
+    ? "Most watched anime on MyAnimeList"
 
     : selectedSort ===
       "favorites"

@@ -967,36 +967,9 @@ function toggleGenre(
           </h2>
 
           <p className="text-zinc-400 text-lg">
-
-  {search.trim()
-    ? "Anime matching your search"
-
-    : selectedGenres.length > 0
-    ? "Filtered by selected genres"
-
-    : selectedSort ===
-      "popularity"
-    ? "Most watched anime"
-
-    : selectedSort ===
-      "favorites"
-    ? "Most favorited anime by fans"
-
-    : selectedSort ===
-      "score"
-    ? "Highest rated anime of all time"
-
-    : selectedSort ===
-      "start_date"
-    ? "Latest released anime"
-
-    : selectedSort ===
-      "all"
-    ? "Browse all anime titles"
-
-    : "Popular anime trending right now"}
-
-</p>
+            Most popular anime
+            right now
+          </p>
         </div>
 
         {loading ? (

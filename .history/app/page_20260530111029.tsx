@@ -269,15 +269,11 @@ const genresToUse =
   genreOverride ||
   selectedGenres;
 
-const sortToUse =
-  sortOverride ??
-  selectedSort;
-
 if (
   !search.trim() &&
   genresToUse.length ===
     0 &&
-  !sortToUse
+  !selectedSort
 ) {
 
     if (reset) {
@@ -322,6 +318,15 @@ if (
   url += `&q=${search}`;
 
 }
+
+    // GENRES
+const genresToUse =
+  genreOverride ||
+  selectedGenres;
+
+const sortToUse =
+  sortOverride ??
+  selectedSort;
 
 // GENRES
 if (
@@ -379,7 +384,7 @@ else if (
 
     // NEWEST
     else if (
-      sortToUse ===
+      selectedSort ===
       "start_date"
     ) {
 
@@ -511,14 +516,14 @@ if (
 }
 
 else if (
-  genresToUse.length >
-0
+  selectedGenres.length >
+  0
 ) {
 
   const genreNames =
     genres
       .filter((g) =>
-        genresToUse.includes(
+        selectedGenres.includes(
           g.id.toString()
         )
       )
@@ -532,7 +537,7 @@ else if (
 }
 
 else if (
-  sortToUse ===
+  selectedSort ===
   "popularity"
 ) {
 
@@ -543,7 +548,7 @@ else if (
 }
 
 else if (
-  sortToUse ===
+  selectedSort ===
   "favorites"
 ) {
 
@@ -554,7 +559,7 @@ else if (
 }
 
 else if (
-  sortToUse ===
+  selectedSort ===
   "score"
 ) {
 
@@ -565,7 +570,7 @@ else if (
 }
 
 else if (
-  sortToUse ===
+  selectedSort ===
   "start_date"
 ) {
 
@@ -576,7 +581,7 @@ else if (
 }
 
 else if (
-  sortToUse ===
+  selectedSort ===
   "all"
 ) {
 
@@ -806,22 +811,17 @@ function toggleGenre(
                 value={
                   selectedSort
                 }
-        onChange={(e) => {
-
-  const value =
-    e.target.value;
+                onChange={(e) => {
 
   setSelectedSort(
-    value
+    e.target.value
   );
 
   setPage(1);
 
-  searchAnime(
-    true,
-    undefined,
-    value
-  );
+  setTimeout(() => {
+    searchAnime(true);
+  }, 0);
 
 }}
                 className="bg-zinc-900 border border-zinc-800 rounded-2xl px-5 py-4 outline-none h-[58px]"
@@ -967,36 +967,9 @@ function toggleGenre(
           </h2>
 
           <p className="text-zinc-400 text-lg">
-
-  {search.trim()
-    ? "Anime matching your search"
-
-    : selectedGenres.length > 0
-    ? "Filtered by selected genres"
-
-    : selectedSort ===
-      "popularity"
-    ? "Most watched anime"
-
-    : selectedSort ===
-      "favorites"
-    ? "Most favorited anime by fans"
-
-    : selectedSort ===
-      "score"
-    ? "Highest rated anime of all time"
-
-    : selectedSort ===
-      "start_date"
-    ? "Latest released anime"
-
-    : selectedSort ===
-      "all"
-    ? "Browse all anime titles"
-
-    : "Popular anime trending right now"}
-
-</p>
+            Most popular anime
+            right now
+          </p>
         </div>
 
         {loading ? (

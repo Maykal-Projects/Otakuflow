@@ -269,10 +269,6 @@ const genresToUse =
   genreOverride ||
   selectedGenres;
 
-const sortToUse =
-  sortOverride ??
-  selectedSort;
-
 if (
   !search.trim() &&
   genresToUse.length ===
@@ -322,6 +318,10 @@ if (
   url += `&q=${search}`;
 
 }
+
+const sortToUse =
+  sortOverride ??
+  selectedSort;
 
 // GENRES
 if (
@@ -518,7 +518,7 @@ else if (
   const genreNames =
     genres
       .filter((g) =>
-        genresToUse.includes(
+        selectedGenres.includes(
           g.id.toString()
         )
       )
@@ -967,36 +967,9 @@ function toggleGenre(
           </h2>
 
           <p className="text-zinc-400 text-lg">
-
-  {search.trim()
-    ? "Anime matching your search"
-
-    : selectedGenres.length > 0
-    ? "Filtered by selected genres"
-
-    : selectedSort ===
-      "popularity"
-    ? "Most watched anime"
-
-    : selectedSort ===
-      "favorites"
-    ? "Most favorited anime by fans"
-
-    : selectedSort ===
-      "score"
-    ? "Highest rated anime of all time"
-
-    : selectedSort ===
-      "start_date"
-    ? "Latest released anime"
-
-    : selectedSort ===
-      "all"
-    ? "Browse all anime titles"
-
-    : "Popular anime trending right now"}
-
-</p>
+            Most popular anime
+            right now
+          </p>
         </div>
 
         {loading ? (
@@ -1038,7 +1011,7 @@ function toggleGenre(
                       !search.trim() &&
                       selectedGenres.length ===
                         0 &&
-                      !selectedSort
+                      !sortToUse
                     ) {
                       searchTrendingMore();
                     } else {

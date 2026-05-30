@@ -48,6 +48,11 @@ export default function HomePage() {
     setLoadingMore,
   ] = useState(false);
 
+  const [
+  showGenres,
+  setShowGenres,
+] = useState(false);
+
   const [search, setSearch] =
     useState("");
 
@@ -65,7 +70,7 @@ export default function HomePage() {
   ] = useState<any[]>([]);
 
   const [pageTitle, setPageTitle] =
-    useState("Browse Anime");
+    useState("Trending Now");
 
   const [
     selectedSort,
@@ -76,11 +81,6 @@ export default function HomePage() {
     selectedGenres,
     setSelectedGenres,
   ] = useState<string[]>([]);
-
-  const [
-    showGenreFilter,
-    setShowGenreFilter,
-  ] = useState(false);
 
   const timeoutRef =
     useRef<NodeJS.Timeout | null>(
@@ -121,7 +121,7 @@ export default function HomePage() {
 
     setPageTitle(
       state.pageTitle ||
-      "Browse Anime"
+      "Trending Now"
     );
 
     setLoading(false);
@@ -189,7 +189,7 @@ useEffect(() => {
       }
 
       setPageTitle(
-        "Browse Anime"
+        "Trending Now"
       );
 
       setHasMore(true);
@@ -228,27 +228,12 @@ useEffect(() => {
           ?.has_next_page
       );
 
-     setAnimeList(
-  (prev) => {
-
-    const combined = [
-      ...prev,
-      ...newAnime,
-    ];
-
-    return Array.from(
-      new Map(
-        combined.map(
-          (anime: any) => [
-            anime.mal_id,
-            anime,
-          ]
-        )
-      ).values()
-    );
-
-  }
-);
+      setAnimeList(
+        (prev) => [
+          ...prev,
+          ...newAnime,
+        ]
+      );
 
       setPage(page + 1);
     } catch (error) {
@@ -258,27 +243,17 @@ useEffect(() => {
     setLoadingMore(false);
   }
 
-async function searchAnime(
-  reset = false,
-  genreOverride?: string[],
-  sortOverride?: string
+  async function searchAnime(
+  reset = false
 ) {
 
   // TRENDING
-const genresToUse =
-  genreOverride ||
-  selectedGenres;
-
-const sortToUse =
-  sortOverride ??
-  selectedSort;
-
-if (
-  !search.trim() &&
-  genresToUse.length ===
-    0 &&
-  !sortToUse
-) {
+  if (
+    !search.trim() &&
+    selectedGenres.length ===
+      0 &&
+    !selectedSort
+  ) {
 
     if (reset) {
 
@@ -323,31 +298,40 @@ if (
 
 }
 
-// GENRES
-if (
-  genresToUse.length >
-  0
-) {
+    // GENRES
+    if (
+      selectedGenres.length >
+      0
+    ) {
 
-  url += `&genres=${genresToUse.join(",")}`;
+      const genreIds =
+        genres
+          .filter((g) =>
+            selectedGenres.includes(
+              g.name
+            )
+          )
+          .map((g) => g.id)
+          .join(",");
 
-}
+      url += `&genres=${genreIds}`;
+    }
 
     // SORT
 
     // MOST POPULAR
    if (
-  sortToUse ===
+  selectedSort ===
   "popularity"
 ) {
 
   url +=
-    "&order_by=popularity&sort=asc";
+    "&order_by=popularity&sort=desc";
 
 }
     // FAVORITES
     else if (
-      sortToUse ===
+      selectedSort ===
       "favorites"
     ) {
 
@@ -356,19 +340,17 @@ if (
 
     }
 
-else if (
-  sortToUse ===
+if (
+  selectedSort ===
   "all"
 ) {
 
-  url +=
-    "&order_by=members&sort=desc";
-
+  // NO SORTING
 }
 
     // TOP RATED
     else if (
-      sortToUse ===
+      selectedSort ===
       "score"
     ) {
 
@@ -379,7 +361,7 @@ else if (
 
     // NEWEST
     else if (
-      sortToUse ===
+      selectedSort ===
       "start_date"
     ) {
 
@@ -392,7 +374,7 @@ else if (
     else {
 
       url +=
-        "&order_by=score&sort=desc";
+        "&order_by=members&sort=desc";
 
     }
 
@@ -472,27 +454,12 @@ if (reset) {
 
 } else {
 
-setAnimeList(
-  (prev) => {
-
-    const combined = [
+  setAnimeList(
+    (prev) => [
       ...prev,
       ...newAnime,
-    ];
-
-    return Array.from(
-      new Map(
-        combined.map(
-          (anime: any) => [
-            anime.mal_id,
-            anime,
-          ]
-        )
-      ).values()
-    );
-
-  }
-);
+    ]
+  );
 
 }
 
@@ -500,99 +467,11 @@ setAnimeList(
       currentPage + 1
     );
 
-if (
-  search.trim()
-) {
-
-  setPageTitle(
-    `Search Results for "${search}"`
-  );
-
-}
-
-else if (
-  genresToUse.length >
-0
-) {
-
-  const genreNames =
-    genres
-      .filter((g) =>
-        genresToUse.includes(
-          g.id.toString()
-        )
-      )
-      .map((g) => g.name)
-      .join(", ");
-
-  setPageTitle(
-    genreNames
-  );
-
-}
-
-else if (
-  sortToUse ===
-  "popularity"
-) {
-
-  setPageTitle(
-    "Most Popular"
-  );
-
-}
-
-else if (
-  sortToUse ===
-  "favorites"
-) {
-
-  setPageTitle(
-    "Most Favorited"
-  );
-
-}
-
-else if (
-  sortToUse ===
-  "score"
-) {
-
-  setPageTitle(
-    "Top Rated"
-  );
-
-}
-
-else if (
-  sortToUse ===
-  "start_date"
-) {
-
-  setPageTitle(
-    "Newest Anime"
-  );
-
-}
-
-else if (
-  sortToUse ===
-  "all"
-) {
-
-  setPageTitle(
-    "All Anime"
-  );
-
-}
-
-else {
-
-  setPageTitle(
-    "Browse Anime"
-  );
-
-}
+    setPageTitle(
+      search.trim()
+        ? `Search Results for "${search}"`
+        : "Filtered Anime"
+    );
 
   } catch (error) {
 
@@ -650,29 +529,46 @@ if (
             const json =
               await response.json();
 
-            const filtered =
-              (
-                json.data ||
-                []
-              ).filter(
-                (
-                  anime: any
-                ) =>
-                  anime.title
-                    ?.toLowerCase()
-                    .includes(
-                      value.toLowerCase()
-                    ) ||
-                  anime.title_english
-                    ?.toLowerCase()
-                    .includes(
-                      value.toLowerCase()
-                    )
-              );
+       const filtered = Array.from(
 
-            setSuggestions(
-              filtered
-            );
+  new Map(
+
+    (json.data || [])
+
+      .filter(
+        (anime: any) =>
+
+          anime.title
+            ?.toLowerCase()
+            .includes(
+              value.toLowerCase()
+            )
+
+          ||
+
+          anime.title_english
+            ?.toLowerCase()
+            .includes(
+              value.toLowerCase()
+            )
+
+      )
+
+      .map(
+        (anime: any) => [
+          anime.mal_id,
+          anime,
+        ]
+      )
+
+  ).values()
+
+);
+
+setSuggestions(
+  filtered
+);
+
           } catch (error) {
             console.error(
               error
@@ -684,23 +580,20 @@ if (
   }
 
 function toggleGenre(
-  genreId: number
+  genre: string
 ) {
 
   const updatedGenres =
     selectedGenres.includes(
-      genreId.toString()
+      genre
     )
-
       ? selectedGenres.filter(
           (g) =>
-            g !==
-            genreId.toString()
+            g !== genre
         )
-
       : [
           ...selectedGenres,
-          genreId.toString(),
+          genre,
         ];
 
   setSelectedGenres(
@@ -709,12 +602,72 @@ function toggleGenre(
 
   setPage(1);
 
-  searchAnime(
-    true,
+  setLoading(true);
+
+  searchAnimeWithGenres(
     updatedGenres
   );
 
 }
+
+async function searchAnimeWithGenres(
+  genresToUse: string[]
+) {
+
+  try {
+
+    let url =
+      `https://api.jikan.moe/v4/anime?page=1&limit=24`;
+
+    // SEARCH
+  if (
+  search.trim()
+) {
+
+  url += `&q=${search}`;
+
+}
+    // GENRES
+    if (
+      genresToUse.length > 0
+    ) {
+
+      const genreIds =
+        genres
+          .filter((g) =>
+            genresToUse.includes(
+              g.name
+            )
+          )
+          .map((g) => g.id)
+          .join(",");
+
+      url += `&genres=${genreIds}`;
+
+    }
+
+    const response =
+      await fetch(url);
+
+    const json =
+      await response.json();
+
+    setAnimeList(
+      json.data || []
+    );
+
+    setPage(2);
+
+  } catch (error) {
+
+    console.error(error);
+
+  }
+
+  setLoading(false);
+
+}
+
   return (
     <main className="min-h-screen bg-black text-white pt-28">
       <Navbar />
@@ -745,95 +698,86 @@ function toggleGenre(
             {/* LEFT FILTERS */}
             <div className="flex items-center gap-4">
 
-              {/* GENRE */}
-              <div className="relative">
-                <button
-                  type="button"
-                  onClick={() =>
-                    setShowGenreFilter(
-                      !showGenreFilter
-                    )
-                  }
-                  className="bg-zinc-900 border border-zinc-800 rounded-2xl px-6 py-4 font-semibold hover:border-violet-500 transition h-[58px]"
-                >
-                  Genre{" "}
-                  {selectedGenres.length >
-                    0 &&
-                    `(${selectedGenres.length})`}
-                </button>
+              {/* GENRES */}
+<div className="relative">
 
-                {showGenreFilter && (
-                  <div className="absolute top-full mt-3 left-0 bg-zinc-900/95 backdrop-blur-2xl border border-zinc-800 rounded-3xl p-6 w-[500px] shadow-[0_20px_80px_rgba(0,0,0,0.6)] z-50">
-                    <div className="grid grid-cols-3 gap-4">
-                      {genres.map(
-                        (
-                          genre
-                        ) => (
-                          <label
-                            key={
-                              genre.id
-                            }
-                            className="flex items-center gap-3 text-sm cursor-pointer hover:text-violet-300 transition"
-                          >
-                            <input
-                              type="checkbox"
-                              checked={selectedGenres.includes(
-  genre.id.toString()
-)}
-                              onChange={() =>
-                               toggleGenre(
-  genre.id
-)
-                              }
-                              className="accent-violet-500"
-                            />
+  <button
+    type="button"
+    onClick={() =>
+      setShowGenres(
+        !showGenres
+      )
+    }
+    className="bg-zinc-900 border border-zinc-800 rounded-2xl px-6 py-4 font-semibold hover:border-violet-500 transition h-[58px]"
+  >
+    Genres
+    {selectedGenres.length >
+      0 &&
+      ` (${selectedGenres.length})`}
+  </button>
 
-                            {
-                              genre.name
-                            }
-                          </label>
-                        )
-                      )}
-                    </div>
-                  </div>
-                )}
-              </div>
+  {showGenres && (
 
-              
+    <div className="absolute top-full left-0 mt-3 bg-zinc-950/95 backdrop-blur-2xl border border-zinc-800 rounded-3xl p-4 z-50 w-[700px] max-w-[90vw] shadow-[0_20px_80px_rgba(0,0,0,0.6)]">
+
+      <div className="flex flex-wrap gap-3">
+
+        {genres.map(
+          (genre) => (
+
+            <button
+              key={genre.id}
+              onClick={() =>
+                toggleGenre(
+                  genre.name
+                )
+              }
+              className={`px-4 py-2 rounded-2xl border transition font-semibold ${
+                selectedGenres.includes(
+                  genre.name
+                )
+                  ? "bg-violet-600 border-violet-400 text-white"
+                  : "bg-zinc-900 border-zinc-800 text-zinc-300 hover:border-violet-500"
+              }`}
+            >
+              {genre.name}
+            </button>
+
+          )
+        )}
+
+      </div>
+
+    </div>
+
+  )}
+
+</div>
 
               {/* SORT */}
               <select
                 value={
                   selectedSort
                 }
-        onChange={(e) => {
-
-  const value =
-    e.target.value;
+                onChange={(e) => {
 
   setSelectedSort(
-    value
+    e.target.value
   );
 
   setPage(1);
 
-  searchAnime(
-    true,
-    undefined,
-    value
-  );
+  setTimeout(() => {
+    searchAnime(true);
+  }, 0);
 
 }}
                 className="bg-zinc-900 border border-zinc-800 rounded-2xl px-5 py-4 outline-none h-[58px]"
               >
 
                 <option value="">
-  Browse Anime
-</option>
-
-<option value="all">
-  All
-</option>
+                  Trending
+                </option>
 
                 <option value="popularity">
                   Most Popular
@@ -967,36 +911,9 @@ function toggleGenre(
           </h2>
 
           <p className="text-zinc-400 text-lg">
-
-  {search.trim()
-    ? "Anime matching your search"
-
-    : selectedGenres.length > 0
-    ? "Filtered by selected genres"
-
-    : selectedSort ===
-      "popularity"
-    ? "Most watched anime"
-
-    : selectedSort ===
-      "favorites"
-    ? "Most favorited anime by fans"
-
-    : selectedSort ===
-      "score"
-    ? "Highest rated anime of all time"
-
-    : selectedSort ===
-      "start_date"
-    ? "Latest released anime"
-
-    : selectedSort ===
-      "all"
-    ? "Browse all anime titles"
-
-    : "Popular anime trending right now"}
-
-</p>
+            Most popular anime
+            right now
+          </p>
         </div>
 
         {loading ? (
