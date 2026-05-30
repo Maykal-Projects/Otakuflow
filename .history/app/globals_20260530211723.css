@@ -34,7 +34,7 @@ body {
 @media (max-width: 640px) {
 
   html {
-    zoom: 0.85;
+    zoom: 0.75;
   }
 
 }
