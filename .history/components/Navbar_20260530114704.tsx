@@ -61,7 +61,7 @@ export default function Navbar() {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(168,85,247,0.18),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(217,70,239,0.18),transparent_35%)]" />
 
       {/* CONTENT */}
-      <div className="relative px-3 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
+      <div className="relative px-6 py-4 flex items-center justify-between">
 
         {/* LEFT */}
         <div className="flex items-center gap-3">

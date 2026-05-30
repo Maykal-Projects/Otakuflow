@@ -725,7 +725,7 @@ function toggleGenre(
 
         <div className="relative max-w-7xl mx-auto text-center">
           {/* TITLE */}
-          <h1 className="text-3xl sm:text-5xl md:text-8xl font-black leading-none mb-8 bg-gradient-to-r from-violet-400 via-fuchsia-500 to-pink-500 bg-clip-text text-transparent">
+          <h1 className="text-4xl sm:text-6xl md:text-8xl font-black leading-none mb-8 bg-gradient-to-r from-violet-400 via-fuchsia-500 to-pink-500 bg-clip-text text-transparent">
             Discover Anime
           </h1>
 
@@ -962,7 +962,7 @@ function toggleGenre(
       {/* GRID */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 pb-24">
         <div className="mb-12">
-          <h2 className="text-2xl sm:text-4xl md:text-5xl font-black mb-3">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black mb-3">
             {pageTitle}
           </h2>
 
@@ -1012,7 +1012,7 @@ function toggleGenre(
           </div>
         ) : (
           <>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
               {animeList.map(
                 (
                   anime: any,

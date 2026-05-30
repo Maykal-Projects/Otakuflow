@@ -962,7 +962,7 @@ function toggleGenre(
       {/* GRID */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 pb-24">
         <div className="mb-12">
-          <h2 className="text-2xl sm:text-4xl md:text-5xl font-black mb-3">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black mb-3">
             {pageTitle}
           </h2>
 
@@ -1012,7 +1012,7 @@ function toggleGenre(
           </div>
         ) : (
           <>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
               {animeList.map(
                 (
                   anime: any,

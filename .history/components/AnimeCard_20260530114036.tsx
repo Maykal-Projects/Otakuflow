@@ -26,7 +26,7 @@ export default function AnimeCard({
                 ?.large_image_url
             }
             alt=""
-            className="w-full h-[220px] sm:h-[380px] object-cover transition duration-700 group-hover:scale-110"
+            className="w-full h-[240px] sm:h-[380px] object-cover transition duration-700 group-hover:scale-110"
           />
 
           {/* Overlay */}
