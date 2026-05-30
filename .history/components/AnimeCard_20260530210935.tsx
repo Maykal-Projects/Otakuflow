@@ -17,7 +17,7 @@ export default function AnimeCard({
       <div className="absolute -inset-2 bg-gradient-to-r from-violet-600/0 via-fuchsia-500/0 to-pink-500/0 group-hover:from-violet-600/30 group-hover:via-fuchsia-500/20 group-hover:to-pink-500/30 blur-2xl transition duration-700 rounded-[32px]" />
 
       {/* Card */}
-      <div className="relative overflow-hidden rounded-2xl sm:rounded-[28px] border border-white/10 bg-zinc-950/80 backdrop-blur-xl transition duration-500 group-hover:border-violet-500/50 group-hover:-translate-y-2 h-full flex flex-col">
+      <div className="relative overflow-hidden rounded-[28px] border border-white/10 bg-zinc-950/80 backdrop-blur-xl transition duration-500 group-hover:border-violet-500/50 group-hover:-translate-y-2 h-full flex flex-col">
         {/* Image */}
         <div className="relative overflow-hidden">
           <img
@@ -54,7 +54,7 @@ export default function AnimeCard({
         </div>
 
         {/* Content */}
-        <div className="p-3 sm:p-5 flex flex-col flex-1">
+        <div className="p-5 flex flex-col flex-1">
           {/* Genres */}
           <div className="flex flex-wrap gap-2 mb-4">
             {anime.genres
@@ -76,7 +76,7 @@ export default function AnimeCard({
           </div>
 
           {/* Title */}
-          <h2 className="text-base sm:text-xl font-black leading-tight line-clamp-3 min-h-[88px] mb-3 group-hover:text-violet-300 transition">
+          <h2 className="text-xl font-black leading-tight line-clamp-3 min-h-[88px] mb-3 group-hover:text-violet-300 transition">
             {anime.title}
           </h2>
 
