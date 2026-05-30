@@ -46,22 +46,6 @@ export default function HomePage() {
 const [desktopMode, setDesktopMode] =
   useState(false);
 
-useEffect(() => {
-
-  const savedMode =
-    localStorage.getItem(
-      "desktop-mode"
-    );
-
-  if (savedMode === "true") {
-
-    setDesktopMode(true);
-
-  }
-
-
-}, []);
-
   const [
     loadingMore,
     setLoadingMore,
@@ -105,15 +89,6 @@ useEffect(() => {
     useRef<NodeJS.Timeout | null>(
       null
     );
-
-useEffect(() => {
-
-  localStorage.setItem(
-    "desktop-mode",
-    desktopMode.toString()
-  );
-
-}, [desktopMode]);
 
  useEffect(() => {
 
@@ -746,7 +721,11 @@ function toggleGenre(
  return (
 <>
 <main
-  className="relative z-0 min-h-screen bg-black text-white pt-28"
+  className={`relative z-0 min-h-screen bg-black text-white pt-28 transition-all duration-300 ${
+    desktopMode
+      ? "scale-[0.92] origin-top overflow-x-hidden"
+      : ""
+  }`}
 >
       <Navbar />
 
@@ -1091,7 +1070,25 @@ function toggleGenre(
 
     </main>
 
-</>
+{/* MOBILE DESKTOP TOGGLE */}
+<div className="sm:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-[999999]">
+
+  <button
+    onClick={() =>
+      setDesktopMode(
+        !desktopMode
+      )
+    }
+    className="px-5 py-3 rounded-full border border-violet-500/20 bg-black/80 backdrop-blur-2xl text-sm font-bold shadow-[0_0_30px_rgba(168,85,247,0.25)]"
+  >
+
+    {desktopMode
+      ? "Switch to Mobile"
+      : "Switch to Desktop"}
+
+  </button>
+
+</div>
 
   );
 }

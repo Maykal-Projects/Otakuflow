@@ -235,30 +235,14 @@ if (newMode) {
         Home
       </Link>
 
-      <div className="flex items-center gap-3">
-
-  <h1 className="text-lg font-black bg-gradient-to-r from-violet-400 to-fuchsia-500 bg-clip-text text-transparent">
-    Anime
-  </h1>
-
-</div>
+      <h1 className="text-lg font-black bg-gradient-to-r from-violet-400 to-fuchsia-500 bg-clip-text text-transparent">
+        Anime
+      </h1>
 
     </div>
 
     {/* RIGHT */}
     <div className="flex items-center gap-2">
-
-{/* DESKTOP TOGGLE */}
-<button
-  onClick={toggleDesktopMode}
-  className="w-9 h-9 rounded-full bg-black/70 border border-white/10 backdrop-blur-xl flex items-center justify-center shadow-[0_0_20px_rgba(0,0,0,0.4)]"
->
-
-  <span className="text-base">
-    {desktopMode ? "📱" : "🖥️"}
-  </span>
-
-</button>
 
       {user && (
 
@@ -353,7 +337,24 @@ if (newMode) {
 
       </nav>
 
+
+{/* MOBILE DESKTOP TOGGLE */}
+<div className="sm:hidden fixed bottom-4 right-4 z-[999999]">
+
+  <button
+    onClick={toggleDesktopMode}
+    className="px-4 py-2 rounded-full border border-violet-500/20 bg-black/70 backdrop-blur-xl text-xs font-bold shadow-[0_0_20px_rgba(168,85,247,0.2)]"
+  >
+
+    {desktopMode
+      ? "Mobile"
+      : "Desktop"}
+
+  </button>
+
 </div>
 
+
+    </div>
   );
 }

@@ -40,3 +40,14 @@ body.desktop-mode {
     zoom: 1;
   }
 }
+
+@media (max-width: 640px) {
+
+  body.desktop-mode {
+
+    min-width: 1400px;
+    overflow-x: auto;
+
+  }
+
+}

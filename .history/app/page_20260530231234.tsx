@@ -746,7 +746,11 @@ function toggleGenre(
  return (
 <>
 <main
-  className="relative z-0 min-h-screen bg-black text-white pt-28"
+  className={`relative z-0 min-h-screen bg-black text-white pt-28 transition-all duration-300 ${
+    desktopMode
+      ? "scale-[0.92] origin-top overflow-x-hidden"
+      : ""
+  }`}
 >
       <Navbar />
 

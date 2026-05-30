@@ -31,12 +31,13 @@ body {
   animation: spinSlow 8s linear infinite;
 }
 
-body.desktop-mode {
-  zoom: 0.82;
-}
+@media (max-width: 640px) {
 
-@media (min-width: 640px) {
   body.desktop-mode {
-    zoom: 1;
+
+    min-width: 1400px;
+    overflow-x: auto;
+
   }
+
 }

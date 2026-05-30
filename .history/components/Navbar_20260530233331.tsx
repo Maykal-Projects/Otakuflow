@@ -139,11 +139,28 @@ if (newMode) {
           <div className="hidden sm:flex items-center justify-between pointer-events-auto">
 
             {/* LEFT */}
-            <div className="flex items-center gap-3">
+<div className="flex flex-col gap-2">
 
-              <Link
-                href="/"
-                className={navClass("/")}
+  <Link
+    href="/"
+    className="px-4 py-2 rounded-full bg-violet-500/10 border border-violet-500/20 text-sm font-bold"
+  >
+    Home
+  </Link>
+
+  {/* DESKTOP TOGGLE */}
+  <button
+    onClick={toggleDesktopMode}
+    className="w-10 h-10 rounded-full bg-black/75 border border-white/10 backdrop-blur-xl flex items-center justify-center shadow-[0_0_20px_rgba(0,0,0,0.4)]"
+  >
+
+    <span className="text-sm">
+      {desktopMode ? "📱" : "🖥️"}
+    </span>
+
+  </button>
+
+</div>
               >
                 Home
               </Link>
@@ -248,18 +265,6 @@ if (newMode) {
     {/* RIGHT */}
     <div className="flex items-center gap-2">
 
-{/* DESKTOP TOGGLE */}
-<button
-  onClick={toggleDesktopMode}
-  className="w-9 h-9 rounded-full bg-black/70 border border-white/10 backdrop-blur-xl flex items-center justify-center shadow-[0_0_20px_rgba(0,0,0,0.4)]"
->
-
-  <span className="text-base">
-    {desktopMode ? "📱" : "🖥️"}
-  </span>
-
-</button>
-
       {user && (
 
         <Link
@@ -350,6 +355,7 @@ if (newMode) {
 </div>
 
         </div>
+
 
       </nav>
 

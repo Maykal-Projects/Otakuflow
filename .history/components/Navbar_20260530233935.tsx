@@ -241,24 +241,24 @@ if (newMode) {
     Anime
   </h1>
 
+  {/* DESKTOP TOGGLE */}
+  <button
+    onClick={toggleDesktopMode}
+    className="w-12 h-12 rounded-full border border-violet-500/20 bg-black/70 backdrop-blur-xl flex items-center justify-center text-sm shadow-[0_0_20px_rgba(168,85,247,0.2)]"
+  >
+
+    {desktopMode
+      ? "📱"
+      : "🖥️"}
+
+  </button>
+
 </div>
 
     </div>
 
     {/* RIGHT */}
     <div className="flex items-center gap-2">
-
-{/* DESKTOP TOGGLE */}
-<button
-  onClick={toggleDesktopMode}
-  className="w-9 h-9 rounded-full bg-black/70 border border-white/10 backdrop-blur-xl flex items-center justify-center shadow-[0_0_20px_rgba(0,0,0,0.4)]"
->
-
-  <span className="text-base">
-    {desktopMode ? "📱" : "🖥️"}
-  </span>
-
-</button>
 
       {user && (
 

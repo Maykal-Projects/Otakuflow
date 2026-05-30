@@ -254,7 +254,7 @@ if (newMode) {
   className="w-9 h-9 rounded-full bg-black/70 border border-white/10 backdrop-blur-xl flex items-center justify-center shadow-[0_0_20px_rgba(0,0,0,0.4)]"
 >
 
-  <span className="text-base">
+  <span className="text-xs">
     {desktopMode ? "📱" : "🖥️"}
   </span>
 

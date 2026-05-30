@@ -248,18 +248,6 @@ if (newMode) {
     {/* RIGHT */}
     <div className="flex items-center gap-2">
 
-{/* DESKTOP TOGGLE */}
-<button
-  onClick={toggleDesktopMode}
-  className="w-9 h-9 rounded-full bg-black/70 border border-white/10 backdrop-blur-xl flex items-center justify-center shadow-[0_0_20px_rgba(0,0,0,0.4)]"
->
-
-  <span className="text-base">
-    {desktopMode ? "📱" : "🖥️"}
-  </span>
-
-</button>
-
       {user && (
 
         <Link
@@ -350,6 +338,22 @@ if (newMode) {
 </div>
 
         </div>
+
+{/* GLOBAL DESKTOP TOGGLE */}
+<div className="fixed bottom-2 left-2 z-[999999] sm:hidden">
+
+  <button
+    onClick={toggleDesktopMode}
+    className="w-11 h-11 rounded-full bg-black/85 border border-white/10 backdrop-blur-xl flex items-center justify-center shadow-[0_0_25px_rgba(0,0,0,0.45)]"
+  >
+
+    <span className="text-sm">
+      {desktopMode ? "📱" : "🖥️"}
+    </span>
+
+  </button>
+
+</div>
 
       </nav>
 
