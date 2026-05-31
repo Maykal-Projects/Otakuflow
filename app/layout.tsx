@@ -3,7 +3,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 
 import { Toaster } from "react-hot-toast";
-
+import OtakuAI from "@/components/OtakuAI";
 export const metadata = {
 
   title: "Otakuflorist",
@@ -32,8 +32,11 @@ export default function RootLayout({
   lang="en"
   suppressHydrationWarning
 >
-      <body className="bg-[#07010f]">
-        {children}
+     <body className="bg-[#07010f]">
+
+  {children}
+
+  <OtakuAI />
 
         <Toaster
   position="top-center"

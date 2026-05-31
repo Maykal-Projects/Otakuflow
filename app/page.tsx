@@ -39,6 +39,9 @@ const genres = [
 export default function HomePage() {
   const [animeList, setAnimeList] =
     useState<any[]>([]);
+    
+    const [showLoader, setShowLoader] =
+  useState(true);
 
   const [loading, setLoading] =
     useState(true);
@@ -654,6 +657,9 @@ else {
             !value.trim() ||
             value.length < 2
           ) {
+
+            
+
             setSuggestions(
               []
             );
@@ -698,9 +704,22 @@ if (
                     )
               );
 
-            setSuggestions(
-              filtered
-            );
+         const uniqueSuggestions =
+  Array.from(
+    new Map(
+      filtered.map(
+        (anime: any) => [
+          anime.mal_id,
+          anime,
+        ]
+      )
+    ).values()
+  );
+
+setSuggestions(
+  uniqueSuggestions
+);
+
           } catch (error) {
             console.error(
               error
@@ -751,7 +770,17 @@ function toggleGenre(
       <Navbar />
 
       {/* HERO */}
-      <section className="relative z-0 pt-32 sm:pt-40 pb-20 sm:pb-24 px-4 sm:px-6">
+<section
+  className={`relative z-0 pt-32 sm:pt-40 px-4 sm:px-6 transition-all duration-300 ${
+    suggestions.length > 0
+  ? suggestions.length <= 2
+    ? "pb-[180px]"
+    : suggestions.length <= 4
+    ? "pb-[280px]"
+    : "pb-[420px]"
+      : "pb-20 sm:pb-24"
+  }`}
+>
         <div className="relative z-0 max-w-7xl mx-auto text-center overflow-visible">
           {/* TITLE */}
           <h1 className="text-2xl sm:text-5xl md:text-8xl font-black leading-none mb-8 bg-gradient-to-r from-violet-400 via-fuchsia-500 to-pink-500 bg-clip-text text-transparent">
@@ -884,7 +913,7 @@ function toggleGenre(
             </div>
 
             {/* SEARCH INPUT */}
-            <div className="relative w-full">
+            <div className="relative z-[999999] w-full">
               <input
                 type="text"
                 value={search}
@@ -908,7 +937,7 @@ function toggleGenre(
               {/* SUGGESTIONS */}
               {suggestions.length >
                 0 && (
-                <div className="absolute z-[999999] top-full mt-3 w-full max-h-[420px] overflow-y-auto bg-zinc-950/95 backdrop-blur-2xl border border-zinc-800 rounded-3xl z-50 shadow-[0_20px_80px_rgba(0,0,0,0.6)]">
+                <div className="absolute z-[999999] top-full mt-3 w-full max-h-[420px] overflow-y-auto bg-zinc-950/95 backdrop-blur-2xl border border-zinc-800 rounded-3xl shadow-[0_20px_80px_rgba(0,0,0,0.6)]">
                   {suggestions.map(
                     (
                       anime: any
@@ -989,8 +1018,24 @@ function toggleGenre(
       </section>
 
       {/* GRID */}
-      <section className="relative z-0 max-w-7xl mx-auto px-4 sm:px-6 pb-24 mt-10">
-        <div className="mb-12">
+      <section
+  className={`relative z-0 max-w-7xl mx-auto px-4 sm:px-6 pb-24 transition-all duration-300 ${
+    suggestions.length > 0
+      ? suggestions.length <= 2
+        ? "mt-20"
+        : suggestions.length <= 4
+          ? "mt-28"
+        : "mt-40"
+      : "mt-0"
+  }`}
+>
+        <div
+  className={`transition-all duration-300 ${
+    suggestions.length > 0
+      ? "opacity-0 h-0 overflow-hidden mb-0"
+      : "opacity-100 mb-12"
+  }`}
+>
           <h2 className="text-2xl sm:text-4xl md:text-5xl font-black mb-3">
             {pageTitle}
           </h2>
@@ -1041,16 +1086,16 @@ function toggleGenre(
           </div>
         ) : (
           <>
-            <div className="grid grid-cols-3 sm:grid-cols-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-6 lg:gap-8">
+            <div className="relative z-0 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-6 lg:gap-8">
               {animeList.map(
                 (
                   anime: any,
                   index: number
                 ) => (
                   <AnimeCard
-                    key={`${anime.mal_id}-${index}`}
-                    anime={anime}
-                  />
+  key={`${anime.mal_id}-${index}`}
+  anime={anime}
+/>
                 )
               )}
             </div>

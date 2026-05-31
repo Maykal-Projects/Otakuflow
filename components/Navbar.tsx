@@ -126,7 +126,7 @@ if (newMode) {
 
   return (
 
-    <div className="absolute top-4 left-1/2 -translate-x-1/2 z-50 w-[96%] max-w-[1500 px]">
+    <div className="absolute top-4 left-1/2 -translate-x-1/2 z-50 w-[96%] max-w-[1500px]">
 
       <nav className="w-full overflow-visible rounded-[999px] border border-violet-500/20 bg-gradient-to-r from-violet-950/40 via-black/30 to-fuchsia-950/30 backdrop-blur-3xl shadow-[0_10px_80px_rgba(139,92,246,0.25)] relative">
 
@@ -172,8 +172,8 @@ if (newMode) {
                 <Link
                   href="/profile"
                   className={`${navClass(
-                    "/profile"
-                  )} flex items-center gap-2`}
+  "/profile"
+)} flex items-center gap-2 px-3`}
                 >
 
                   <img
@@ -183,10 +183,10 @@ if (newMode) {
                       "/default-avatar.png"
                     }
                     alt=""
-                    className="w-8 h-8 rounded-full object-cover border border-violet-500/30"
+                    className="w-10 h-10 sm:w-11 sm:h-11 rounded-full object-cover border-2 border-violet-400 shadow-[0_0_15px_rgba(168,85,247,0.6)]"
                   />
 
-                  <span className="text-sm font-semibold">
+                  <span className="text-xs sm:text-sm font-medium">
                     Profile
                   </span>
 

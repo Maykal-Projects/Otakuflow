@@ -8,7 +8,6 @@ import {
 import Navbar from "@/components/Navbar";
 import Link from "next/link";
 import LibraryAnimeCard from "@/components/LibraryAnimeCard";
-
 import { supabase } from "@/lib/supabase";
 
 export default function FavoritesPage() {
