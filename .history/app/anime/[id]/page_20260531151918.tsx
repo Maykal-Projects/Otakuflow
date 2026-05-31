@@ -133,45 +133,8 @@ async function fetchAnime() {
       ...json.data,
 
       characters:
-  (charactersJson.data || [])
-    .sort(
-  (
-    a: any,
-    b: any
-  ) => {
-
-    const rolePriority: any = {
-      Main: 0,
-      Supporting: 1,
-    };
-
-    // ROLE SORT
-    const roleDifference =
-      (rolePriority[
-        a.role
-      ] ?? 99) -
-
-      (rolePriority[
-        b.role
-      ] ?? 99);
-
-    // IF SAME ROLE
-    // SORT BY FAVORITES
-    if (
-      roleDifference === 0
-    ) {
-
-      return (
-        (b.favorites || 0) -
-        (a.favorites || 0)
-      );
-
-    }
-
-    return roleDifference;
-
-  }
-)
+        charactersJson.data ||
+        [],
     });
 
     const airing =
