@@ -41,15 +41,6 @@ export default function RootLayout({
   }}
 >
 
-  <head>
-
-<meta
-  name="theme-color"
-  content="#07010f"
-/>
-
-</head>
-
   {children}
 
   <OtakuAI />

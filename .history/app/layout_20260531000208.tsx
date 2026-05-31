@@ -16,9 +16,8 @@ export const metadata = {
 
 };
 
-
 export const viewport = {
-  themeColor: "#07010f",
+  themeColor: "#000000",
   colorScheme: "dark",
   viewportFit: "cover",
 };
@@ -33,22 +32,7 @@ export default function RootLayout({
   lang="en"
   suppressHydrationWarning
 >
-    <body
-  className="bg-[#07010f] text-white"
-  style={{
-    backgroundColor:
-      "#07010f",
-  }}
->
-
-  <head>
-
-<meta
-  name="theme-color"
-  content="#07010f"
-/>
-
-</head>
+     <body className="bg-[#07010f]">
 
   {children}
 
